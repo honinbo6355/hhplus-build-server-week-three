@@ -33,7 +33,7 @@
     "result": {
         "userUuid": "550e8400-e29b-41d4-a716-446655440000",
         "rank": 5,
-        "remainingTime": "5분 30초"
+        "remainingTime": "5:30"
     }
     "error": null
 }
@@ -44,11 +44,9 @@
 **GET /api/reservations**
 - request header
 ```
-{
-    "userUuid": "550e8400-e29b-41d4-a716-446655440000",
-    "rank": 5,
-    "remainingTime": "5분 30초"
-}
+userUuid="550e8400-e29b-41d4-a716-446655440000",
+rank=5,
+remainingTime="5:30"
 ```
 
 - response body
@@ -64,11 +62,9 @@
 **GET /api/reservations/{reserveDate}**
 - request header
 ```
-{
-    "userUuid": "550e8400-e29b-41d4-a716-446655440000",
-    "rank": 5,
-    "remainingTime": "5분 30초"
-}
+userUuid="550e8400-e29b-41d4-a716-446655440000",
+rank=5,
+remainingTime="5:30"
 ```
 
 - response body
@@ -84,11 +80,9 @@
 **POST /api/reservations**
 - request header
 ```
-{
-    "userUuid": "550e8400-e29b-41d4-a716-446655440000",
-    "rank": 5,
-    "remainingTime": "5분 30초"
-}
+userUuid="550e8400-e29b-41d4-a716-446655440000",
+rank=5,
+remainingTime="5:30"
 ```
 
 - request body
@@ -148,11 +142,9 @@
 
 - request header
 ```
-{
-    "userUuid": "550e8400-e29b-41d4-a716-446655440000",
-    "rank": 5,
-    "remainingTime": "5분 30초"
-}
+userUuid="550e8400-e29b-41d4-a716-446655440000",
+rank=5,
+remainingTime="5:30"
 ```
 
 - request body
