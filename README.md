@@ -144,7 +144,7 @@
 
 ### 결제 API
 
-**GET /api/point/{userId}**
+**POST /api/pay**
 
 - request header
 ```
