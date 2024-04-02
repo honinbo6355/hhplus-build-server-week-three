@@ -55,10 +55,8 @@
 ```
 {
     "result": {
-        "userUuid": "550e8400-e29b-41d4-a716-446655440000",
-        "rank": 5,
-        "remainingTime": "5:30"
-    }
+        "token": "550e8400-e29b-41d4-a716-446655440000"
+    },
     "error": null
 }
 ```
@@ -112,6 +110,7 @@ token="550e8400-e29b-41d4-a716-446655440000",
 - request body
 ```
 {
+    "concertId": 1,
     "reserveDate": "2024-03-01",
     "seatNum": 1
 }
@@ -174,6 +173,7 @@ token="550e8400-e29b-41d4-a716-446655440000",
 ```
 {
     "userId": 1,
+    "reserveId": 1,
     "point": 5000
 }
 ```
