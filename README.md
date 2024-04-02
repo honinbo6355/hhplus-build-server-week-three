@@ -1,4 +1,4 @@
-# hhplus-build-server-week-three
+<img width="588" alt="image" src="https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/2c348c56-bb8a-4d5c-aa8a-ce1b050d0f4a"># hhplus-build-server-week-three
 항해 플러스 3주차 과제 - 서버 구축
 
 # 선정 시나리오
@@ -22,6 +22,8 @@
 ### 유저 토큰 발급
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/e2e4c8a6-b742-44ca-ae6b-d3fc55822366)
 
+### 예약 가능 날짜 조회
+<img width="588" alt="image" src="https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/658268ae-a596-4b9f-9523-6106aa832da6">
 
 ## API Interface
 
