@@ -17,6 +17,11 @@
 - 잔액 조회 API : 2h
 - 좌석 예약 요청 API : 4h
 
+## Sequence Diagram
+
+### 유저 토큰 발급
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/e2e4c8a6-b742-44ca-ae6b-d3fc55822366)
+
 
 ## API Interface
 
