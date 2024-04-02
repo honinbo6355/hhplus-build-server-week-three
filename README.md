@@ -6,13 +6,16 @@
 
 # Milestone
 - 하루=8h, 8*5일=40h
-- 프로젝트 생성 및 기본 설정 : 4h
-- 유저 토큰 발급 API : 16h
-- 예약 가능 날짜 조회 API : 2h
-- 예약 가능한 좌석 조회 API : 2h
-- 잔액 충전 API : 3h
+- 프로젝트 생성 및 기본 설정 : 6h
+- 유저 토큰 발급 API : 총 12h
+   - 대기열 추가 작업 : 6h
+   - 토큰 발급 : 6h
+- 토큰 검증 처리 : 6h
+- 예약 가능 날짜 조회 API : 3h
+- 예약 가능한 좌석 조회 API : 3h
+- 잔액 충전 API : 4h
 - 잔액 조회 API : 2h
-- 좌석 예약 요청 API : 11h
+- 좌석 예약 요청 API : 4h
 
 
 ## API Interface
@@ -42,11 +45,11 @@
 ### 예약 가능 날짜 조회 API
 
 **GET /api/reservations**
+
 - request header
+   - userUuid+잔여시간을 hmac-sha256 암호화
 ```
-userUuid="550e8400-e29b-41d4-a716-446655440000",
-rank=5,
-remainingTime="5:30"
+token="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 - response body
@@ -60,11 +63,11 @@ remainingTime="5:30"
 ### 예약 가능한 좌석 조회 API
 
 **GET /api/reservations/{reserveDate}**
+
 - request header
+   - userUuid+잔여시간을 hmac-sha256 암호화
 ```
-userUuid="550e8400-e29b-41d4-a716-446655440000",
-rank=5,
-remainingTime="5:30"
+token="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 - response body
@@ -78,11 +81,11 @@ remainingTime="5:30"
 ### 좌석 예약 요청 API
 
 **POST /api/reservations**
+
 - request header
+   - userUuid+잔여시간을 hmac-sha256 암호화
 ```
-userUuid="550e8400-e29b-41d4-a716-446655440000",
-rank=5,
-remainingTime="5:30"
+token="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 - request body
@@ -141,10 +144,9 @@ remainingTime="5:30"
 **POST /api/pay**
 
 - request header
+   - userUuid+잔여시간을 hmac-sha256 암호화
 ```
-userUuid="550e8400-e29b-41d4-a716-446655440000",
-rank=5,
-remainingTime="5:30"
+token="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 - request body
