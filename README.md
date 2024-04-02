@@ -23,7 +23,8 @@
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/e2e4c8a6-b742-44ca-ae6b-d3fc55822366)
 
 ### 예약 가능 날짜 조회
-<img width="588" alt="image" src="https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/658268ae-a596-4b9f-9523-6106aa832da6">
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cb5ced57-a508-4cb4-abab-73eaf6e56dc1)
+
 
 ## API Interface
 
