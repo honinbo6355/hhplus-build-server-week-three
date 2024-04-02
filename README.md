@@ -27,6 +27,17 @@
 ### 예약 가능 좌석 조회
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/456bfa53-566c-4779-a116-311e1372be94)
 
+### 좌석 예약 요청
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/6b9acee4-e63a-4f36-bea9-7e5f77d8664f)
+
+### 잔액 충전
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/0f7886df-8842-46b1-a462-980a94c2fe53)
+
+### 잔액 조회
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/f76564c1-061f-47c1-9ced-35e3e251c195)
+
+### 결제
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/94035e4e-d9f4-4ddc-8744-6242f9b90d4e)
 
 ## API Interface
 
