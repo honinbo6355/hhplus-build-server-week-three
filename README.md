@@ -134,7 +134,7 @@
 
 ### 예약 가능 날짜 조회 API
 
-**GET /api/reservations**
+**GET /api/concert/{concertDetailId}/date**
 
 - request header
    - userUuid+잔여시간을 hmac-sha256 암호화
@@ -142,10 +142,6 @@
 token="550e8400-e29b-41d4-a716-446655440000",
 ```
 
-- query parameter
-```
-?concertId=1
-```
 
 - response body
 ```
@@ -157,7 +153,7 @@ token="550e8400-e29b-41d4-a716-446655440000",
 
 ### 예약 가능한 좌석 조회 API
 
-**GET /api/reservations/{reserveDate}**
+**GET /api/concert/{concertDetailId}/seat**
 
 - request header
    - userUuid+잔여시간을 hmac-sha256 암호화
