@@ -105,7 +105,9 @@
 ## Sequence Diagram
 
 ### 유저 토큰 발급
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/41048081-2cf3-4a43-9d57-ef8783900de4)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/be43a603-ff2e-44c4-9a01-68dbe47de1ef)
+
+### 유저 토큰 조회
 
 ### 예약 가능 날짜 조회
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cb5ced57-a508-4cb4-abab-73eaf6e56dc1)
@@ -147,7 +149,7 @@
 }
 ```
 
-### 토큰 조회 API
+### 유저 토큰 조회 API
 
 **GET /api/users/token**
 
