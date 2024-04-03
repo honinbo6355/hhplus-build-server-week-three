@@ -73,6 +73,8 @@
 - 유저간 대기열을 요청 순서대로 정확하게 제공할 방법을 고민해 봅니다.
 - 동시에 여러 사용자가 예약 요청을 했을 때, 좌석이 중복으로 배정 가능하지 않도록 합니다.
 
+# ERD
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/de208e57-2837-4d89-9e0f-f4b3bd6cba94)
 
 # Milestone
 - 하루=8h, 8*5일=40h
