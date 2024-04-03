@@ -126,7 +126,7 @@
 ```
 {
     "result": {
-        "token": "550e8400-e29b-41d4-a716-446655440000"
+        "userUuid": "550e8400-e29b-41d4-a716-446655440000"
     },
     "error": null
 }
@@ -137,9 +137,9 @@
 **GET /api/concert/{concertDetailId}/date**
 
 - request header
-   - userUuid+잔여시간을 hmac-sha256 암호화
+   
 ```
-token="550e8400-e29b-41d4-a716-446655440000",
+userUuid="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 
@@ -156,15 +156,15 @@ token="550e8400-e29b-41d4-a716-446655440000",
 **GET /api/concert/{concertDetailId}/seat**
 
 - request header
-   - userUuid+잔여시간을 hmac-sha256 암호화
+
 ```
-token="550e8400-e29b-41d4-a716-446655440000",
+userUuid="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 - response body
 ```
 {
-    "result": [1, 3, 5],
+    "result": ["S1", "S3", "S5"],
     "error": null
 }
 ```
@@ -174,17 +174,16 @@ token="550e8400-e29b-41d4-a716-446655440000",
 **POST /api/reservations**
 
 - request header
-   - userUuid+잔여시간을 hmac-sha256 암호화
+   
 ```
-token="550e8400-e29b-41d4-a716-446655440000",
+userUuid="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 - request body
 ```
 {
-    "concertId": 1,
-    "reserveDate": "2024-03-01",
-    "seatNum": 1
+    "concertDetailId": 1,
+    "seatNum": "S1"
 }
 ```
 
@@ -198,7 +197,7 @@ token="550e8400-e29b-41d4-a716-446655440000",
 
 ### 잔액 충전 API
 
-**POST /api/point**
+**PATCH /api/point**
 
 - request body
 ```
@@ -236,16 +235,15 @@ token="550e8400-e29b-41d4-a716-446655440000",
 **POST /api/pay**
 
 - request header
-   - userUuid+잔여시간을 hmac-sha256 암호화
+   
 ```
-token="550e8400-e29b-41d4-a716-446655440000",
+userUuid="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 - request body
 ```
 {
-    "userId": 1,
-    "reserveId": 1,
+    "reservationId": 1,
     "point": 5000
 }
 ```
