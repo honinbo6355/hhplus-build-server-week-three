@@ -97,10 +97,10 @@
    7-2. 유닛 테스트 <br/>
 
 =============== 다음 주차 =============== </br>
-8. 좌석 임시 배정 5분 검증 Polling 구현 <br/>
-9. 잔여 시간 검증 Polling 구현 <br/>
-10. dummy 대기열 추가 Polling 구현 <br/>
-11. 통합테스트 <br/>
+8. 좌석 임시 배정 5분 검증 Polling 구현 <br/> <br/>
+9. 잔여 시간 검증 Polling 구현 <br/> <br/>
+10. dummy 대기열 추가 Polling 구현 <br/> <br/>
+11. 통합테스트 <br/> <br/>
 
 ## Sequence Diagram
 
