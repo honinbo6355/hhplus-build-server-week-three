@@ -74,7 +74,7 @@
 - 동시에 여러 사용자가 예약 요청을 했을 때, 좌석이 중복으로 배정 가능하지 않도록 합니다.
 
 # ERD
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/a8f9c6f4-f701-4b0d-9649-604e192b7f8d)
+[![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/a8f9c6f4-f701-4b0d-9649-604e192b7f8d)](https://private-user-images.githubusercontent.com/29749722/319140201-a8f9c6f4-f701-4b0d-9649-604e192b7f8d.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTIxMzk0MTksIm5iZiI6MTcxMjEzOTExOSwicGF0aCI6Ii8yOTc0OTcyMi8zMTkxNDAyMDEtYThmOWM2ZjQtZjcwMS00YjBkLTk2NDktNjA0ZTE5MmI3ZjhkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA0MDMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNDAzVDEwMTE1OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTgxYTRiMTkzMzI5OWYyYjZmMmI1NmY5ZjA4YTQxZGQ1MzE0OGUyMTA3YmYxMzczYzkzNTE2MGE5ZWM2Yzk2MjYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.zs_Cr3CpnNZRAzupc8TiltTRxnMAhD5oR52tG2cLLM0)
 
 # Milestone
 - 하루=8h, 8*5일=40h
