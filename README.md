@@ -133,6 +133,29 @@
 }
 ```
 
+### 대기열 조회 API
+
+**GET /api/users/token**
+
+- request header
+   
+```
+userUuid="550e8400-e29b-41d4-a716-446655440000",
+```
+
+
+- response body
+```
+{
+    "result": {
+        "waitingCount": 50, // 앞에 대기중인 유저수
+        "rank": 15, // 내 순서
+        "status": "WAITING" // WAITING이면 대기, IN_PROGRESS면 진입
+    },
+    "error": null
+}
+```
+
 ### 예약 가능 날짜 조회 API
 
 **GET /api/concert/{concertDetailId}/date**
@@ -253,29 +276,6 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 ```
 {
     "result": "SUCCESS",
-    "error": null
-}
-```
-
-### 대기열 조회 API
-
-**GET /api/users/token**
-
-- request header
-   
-```
-userUuid="550e8400-e29b-41d4-a716-446655440000",
-```
-
-
-- response body
-```
-{
-    "result": {
-        "waitingCount": 50, // 앞에 대기중인 유저수
-        "rank": 15, // 내 순서
-        "status": "WAITING" // WAITING이면 대기, IN_PROGRESS면 진입
-    },
     "error": null
 }
 ```
