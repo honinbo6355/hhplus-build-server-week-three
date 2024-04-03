@@ -123,7 +123,7 @@
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/76e2e38c-8a75-43a9-b45d-b97b9deb9b13)
 
 ### 잔액 조회
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/ebe50892-4b82-4e9a-b2af-1ffe5820f8a9)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/5f1037ae-0973-4435-86f3-00536e2a7abd)
 
 ### 결제
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/9f38d5ec-1e17-475b-965a-f078ac952ef6)
