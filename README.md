@@ -108,24 +108,25 @@
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/be43a603-ff2e-44c4-9a01-68dbe47de1ef)
 
 ### 유저 토큰 조회
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/640d697a-ecb7-45b8-aaa1-73efa0996bef)
 
 ### 예약 가능 날짜 조회
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cb5ced57-a508-4cb4-abab-73eaf6e56dc1)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cf9a972e-26b6-4b24-a4c7-ca41b4e039d1)
 
 ### 예약 가능 좌석 조회
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/456bfa53-566c-4779-a116-311e1372be94)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/a3e0e445-56c6-44ca-8aa1-446ebc0597cf)
 
 ### 좌석 예약 요청
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/6b9acee4-e63a-4f36-bea9-7e5f77d8664f)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/f9a63529-1037-4cf8-a47a-fce43688bf8e)
 
 ### 잔액 충전
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/0f7886df-8842-46b1-a462-980a94c2fe53)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/76e2e38c-8a75-43a9-b45d-b97b9deb9b13)
 
 ### 잔액 조회
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/f76564c1-061f-47c1-9ced-35e3e251c195)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/ebe50892-4b82-4e9a-b2af-1ffe5820f8a9)
 
 ### 결제
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/94035e4e-d9f4-4ddc-8744-6242f9b90d4e)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/9f38d5ec-1e17-475b-965a-f078ac952ef6)
 
 ## API Interface
 
