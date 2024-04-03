@@ -76,16 +76,17 @@
 
 # Milestone
 - 하루=8h, 8*5일=40h
-- 프로젝트 생성 및 기본 설정 : 6h
+1. dummy 데이터 생성 : 3h ( ~ 4월7일)
+2. 잔액 충전 API : 4h
+3. 잔액 조회 API : 3h
+4. 예약 가능 날짜 조회 API : 3h
+5. 예약 가능한 좌석 조회 API : 3h
+6. 좌석 예약 요청 API : 5h
+
 - 유저 토큰 발급 API : 총 12h
    - 대기열 추가 작업 : 6h
    - 토큰 발급 : 6h
 - 토큰 검증 처리 : 6h
-- 예약 가능 날짜 조회 API : 3h
-- 예약 가능한 좌석 조회 API : 3h
-- 잔액 충전 API : 4h
-- 잔액 조회 API : 2h
-- 좌석 예약 요청 API : 4h
 
 ## Sequence Diagram
 
@@ -252,6 +253,29 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 ```
 {
     "result": "SUCCESS",
+    "error": null
+}
+```
+
+### 대기열 조회 API
+
+**GET /api/users/token**
+
+- request header
+   
+```
+userUuid="550e8400-e29b-41d4-a716-446655440000",
+```
+
+
+- response body
+```
+{
+    "result": {
+        "waitingCount": 50, // 앞에 대기중인 유저수
+        "rank": 15, // 내 순서
+        "status": "WAITING" // WAITING이면 대기, IN_PROGRESS면 진입
+    },
     "error": null
 }
 ```
