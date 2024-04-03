@@ -133,7 +133,7 @@
 }
 ```
 
-### 대기열 조회 API
+### 토큰 조회 API
 
 **GET /api/users/token**
 
