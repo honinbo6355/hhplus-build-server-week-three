@@ -177,7 +177,7 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 
 ### 예약 가능 날짜 조회 API
 
-**GET /api/concert/{concertDetailId}/date**
+**GET /api/concert/{concertId}/date**
 
 - request header
    
@@ -189,7 +189,23 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 - response body
 ```
 {
-    "result": ["2024-03-01 11:30:00", "2024-03-12 14:30:00", "2024-03-17 17:30:00"],
+    "result": {
+        "concertName": "아이유 콘서트",
+        "concertInfos": [
+            {
+                "concertDetailId": 1,
+                "startsAt": "2024-03-01 11:30:00"
+            },
+            {
+                "concertDetailId": 2,
+                "startsAt": "2024-03-12 14:30:00"
+            },
+            {
+                "concertDetailId": 3,
+                "startsAt": ""2024-03-17 17:30:00""
+            }
+         ]
+    },
     "error": null
 }
 ```
