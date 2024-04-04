@@ -122,7 +122,7 @@ https://private-user-images.githubusercontent.com/29749722/319675243-89e36c04-83
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/f9a63529-1037-4cf8-a47a-fce43688bf8e)
 
 ### 잔액 충전
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/76e2e38c-8a75-43a9-b45d-b97b9deb9b13)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/9e4d98a4-03e1-46b6-8abf-7369c7015e61)
 
 ### 잔액 조회
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/5f1037ae-0973-4435-86f3-00536e2a7abd)
