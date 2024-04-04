@@ -74,7 +74,7 @@
 - 동시에 여러 사용자가 예약 요청을 했을 때, 좌석이 중복으로 배정 가능하지 않도록 합니다.
 
 # ERD
-https://private-user-images.githubusercontent.com/29749722/319140201-a8f9c6f4-f701-4b0d-9649-604e192b7f8d.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTIxMzk0MTksIm5iZiI6MTcxMjEzOTExOSwicGF0aCI6Ii8yOTc0OTcyMi8zMTkxNDAyMDEtYThmOWM2ZjQtZjcwMS00YjBkLTk2NDktNjA0ZTE5MmI3ZjhkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA0MDMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNDAzVDEwMTE1OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTgxYTRiMTkzMzI5OWYyYjZmMmI1NmY5ZjA4YTQxZGQ1MzE0OGUyMTA3YmYxMzczYzkzNTE2MGE5ZWM2Yzk2MjYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.zs_Cr3CpnNZRAzupc8TiltTRxnMAhD5oR52tG2cLLM0
+https://private-user-images.githubusercontent.com/29749722/319675243-89e36c04-8309-4eda-9dc1-d236355f6ee2.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTIyNDc5MzgsIm5iZiI6MTcxMjI0NzYzOCwicGF0aCI6Ii8yOTc0OTcyMi8zMTk2NzUyNDMtODllMzZjMDQtODMwOS00ZWRhLTlkYzEtZDIzNjM1NWY2ZWUyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA0MDQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNDA0VDE2MjAzOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTdkYjI1NzY4MDA5MDQ0Yjk1NzM0MDIwMzRmYmIwODlkOWUxOTEwNTE4MGNmNGQ4N2NlZTc2NDQ5YTU5NDQxZDUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.l8SNb_VHdBuX0C1RxoWfC68R6k8xGLkAfaxA_iyjYYA
 
 # Milestone
 - 하루=8h, 8*5일=40h
@@ -122,7 +122,7 @@ https://private-user-images.githubusercontent.com/29749722/319140201-a8f9c6f4-f7
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/f9a63529-1037-4cf8-a47a-fce43688bf8e)
 
 ### 잔액 충전
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/76e2e38c-8a75-43a9-b45d-b97b9deb9b13)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/300e6f19-0942-4c32-89cb-a9320770e7b6)
 
 ### 잔액 조회
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/5f1037ae-0973-4435-86f3-00536e2a7abd)
@@ -177,7 +177,7 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 
 ### 예약 가능 날짜 조회 API
 
-**GET /api/concert/{concertDetailId}/date**
+**GET /api/concert/{concertId}/date**
 
 - request header
    
@@ -189,7 +189,23 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 - response body
 ```
 {
-    "result": ["2024-03-01 11:30:00", "2024-03-12 14:30:00", "2024-03-17 17:30:00"],
+    "result": {
+        "concertName": "아이유 콘서트",
+        "concertInfos": [
+            {
+                "concertDetailId": 1,
+                "startsAt": "2024-03-01 11:30:00"
+            },
+            {
+                "concertDetailId": 2,
+                "startsAt": "2024-03-12 14:30:00"
+            },
+            {
+                "concertDetailId": 3,
+                "startsAt": "2024-03-17 17:30:00"
+            }
+         ]
+    },
     "error": null
 }
 ```
@@ -240,7 +256,7 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 
 ### 잔액 충전 API
 
-**PATCH /api/point**
+**PATCH /api/users/point**
 
 - request body
 ```
@@ -260,7 +276,7 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 
 ### 잔액 조회 API
 
-**GET /api/point/{userId}**
+**GET /api/users/{userId}/point**
 
 - response body
 ```
@@ -275,7 +291,7 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 
 ### 결제 API
 
-**POST /api/pay**
+**POST /api/payment**
 
 - request header
    
