@@ -1,4 +1,8 @@
 package com.example.hhplus.reservation.api.user.dto;
 
-public class PointResponse {
+public record PointResponse (
+    long userId,
+    long point
+) {
+
 }

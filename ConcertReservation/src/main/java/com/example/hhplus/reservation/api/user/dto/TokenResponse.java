@@ -1,4 +1,7 @@
 package com.example.hhplus.reservation.api.user.dto;
 
-public class TokenResponse {
+public record TokenResponse (
+    String userUuid
+) {
+
 }

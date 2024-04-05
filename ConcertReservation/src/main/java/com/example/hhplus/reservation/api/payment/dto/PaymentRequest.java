@@ -1,4 +1,8 @@
 package com.example.hhplus.reservation.api.payment.dto;
 
-public class PaymentRequest {
+public record PaymentRequest (
+    long reservationId,
+    long amount
+) {
+
 }

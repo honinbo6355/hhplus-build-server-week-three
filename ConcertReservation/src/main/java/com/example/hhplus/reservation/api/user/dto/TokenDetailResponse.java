@@ -1,5 +1,11 @@
 package com.example.hhplus.reservation.api.user.dto;
 
-public class TokenDetailResponse {
+import com.example.hhplus.reservation.domain.user.model.TokenStatus;
+
+public record TokenDetailResponse (
+    int waitingCount,
+    int rank,
+    TokenStatus status
+) {
 
 }

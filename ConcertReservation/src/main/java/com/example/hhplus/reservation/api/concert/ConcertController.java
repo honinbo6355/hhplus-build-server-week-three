@@ -2,9 +2,10 @@ package com.example.hhplus.reservation.api.concert;
 
 import com.example.hhplus.reservation.api.common.BasicResponse;
 import com.example.hhplus.reservation.api.concert.dto.ConcertDateResponse;
-import com.example.hhplus.reservation.api.concert.dto.ConcertSeatResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/concert")
@@ -16,7 +17,7 @@ public class ConcertController {
     }
 
     @GetMapping("{concertDetailId}/seat")
-    public ResponseEntity<BasicResponse<ConcertSeatResponse>> getConcertSeat(@RequestHeader String userUuid, @PathVariable Long concertDetailId) {
+    public ResponseEntity<BasicResponse<List<String>>> getConcertSeat(@RequestHeader String userUuid, @PathVariable Long concertDetailId) {
         return null;
     }
 }

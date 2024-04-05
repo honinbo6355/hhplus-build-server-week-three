@@ -1,4 +1,10 @@
 package com.example.hhplus.reservation.api.concert.dto;
 
-public class ConcertDateResponse {
+import java.util.List;
+
+public record ConcertDateResponse (
+    String concertName,
+    List<ConcertDetailDto> concertInfos
+) {
+
 }

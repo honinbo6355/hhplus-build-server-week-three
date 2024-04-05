@@ -1,5 +1,7 @@
 package com.example.hhplus.reservation.api.user.dto;
 
-public class TokenRequest {
+public record TokenRequest (
+    long userId
+) {
 
 }
