@@ -1,6 +1,6 @@
 package com.example.hhplus.reservation.api.user.dto;
 
-import com.example.hhplus.reservation.domain.user.model.TokenStatus;
+import com.example.hhplus.reservation.domain.user.TokenStatus;
 
 public record TokenDetailResponse (
     int waitingCount,

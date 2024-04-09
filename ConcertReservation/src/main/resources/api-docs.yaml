@@ -1,0 +1,325 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /api/users/token:
+    get:
+      tags:
+      - user-controller
+      operationId: getTokenDetail
+      parameters:
+      - name: userUuid
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponseTokenDetailResponse'
+    post:
+      tags:
+      - user-controller
+      operationId: createToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponseTokenResponse'
+  /api/reservations:
+    post:
+      tags:
+      - reservation-controller
+      operationId: createReservation
+      parameters:
+      - name: userUuid
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponseReservationResponse'
+  /api/payment:
+    post:
+      tags:
+      - payment-controller
+      operationId: createPayment
+      parameters:
+      - name: userUuid
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponsePaymentResponse'
+  /api/users/point:
+    patch:
+      tags:
+      - user-controller
+      operationId: chargePoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PointChargeRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponsePointChargeResponse'
+  /api/users/{userId}/point:
+    get:
+      tags:
+      - user-controller
+      operationId: getPoint
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponsePointResponse'
+  /api/concert/{concertId}/date:
+    get:
+      tags:
+      - concert-controller
+      operationId: getConcertDate
+      parameters:
+      - name: userUuid
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: concertId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponseConcertDateResponse'
+  /api/concert/{concertDetailId}/seat:
+    get:
+      tags:
+      - concert-controller
+      operationId: getConcertSeat
+      parameters:
+      - name: userUuid
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: concertDetailId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BasicResponseListString'
+components:
+  schemas:
+    TokenRequest:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+    BasicError:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    BasicResponseTokenResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/TokenResponse'
+        error:
+          $ref: '#/components/schemas/BasicError'
+    TokenResponse:
+      type: object
+      properties:
+        userUuid:
+          type: string
+    ReservationRequest:
+      type: object
+    BasicResponseReservationResponse:
+      type: object
+      properties:
+        result:
+          type: string
+          enum:
+          - SUCCESS
+          - FAIL
+        error:
+          $ref: '#/components/schemas/BasicError'
+    PaymentRequest:
+      type: object
+      properties:
+        reservationId:
+          type: integer
+          format: int64
+        amount:
+          type: integer
+          format: int64
+    BasicResponsePaymentResponse:
+      type: object
+      properties:
+        result:
+          type: string
+          enum:
+          - SUCCESS
+          - FAIL
+        error:
+          $ref: '#/components/schemas/BasicError'
+    PointChargeRequest:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        point:
+          type: integer
+          format: int64
+    BasicResponsePointChargeResponse:
+      type: object
+      properties:
+        result:
+          type: string
+          enum:
+          - SUCCESS
+          - FAIL
+        error:
+          $ref: '#/components/schemas/BasicError'
+    BasicResponsePointResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/PointResponse'
+        error:
+          $ref: '#/components/schemas/BasicError'
+    PointResponse:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        point:
+          type: integer
+          format: int64
+    BasicResponseTokenDetailResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/TokenDetailResponse'
+        error:
+          $ref: '#/components/schemas/BasicError'
+    TokenDetailResponse:
+      type: object
+      properties:
+        waitingCount:
+          type: integer
+          format: int32
+        rank:
+          type: integer
+          format: int32
+        status:
+          type: string
+          enum:
+          - WAITING
+          - IN_PROGRESS
+          - FINISHED
+    BasicResponseConcertDateResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/ConcertDateResponse'
+        error:
+          $ref: '#/components/schemas/BasicError'
+    ConcertDateResponse:
+      type: object
+      properties:
+        concertName:
+          type: string
+        concertInfos:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConcertDetailDto'
+    ConcertDetailDto:
+      type: object
+      properties:
+        concertDetailId:
+          type: integer
+          format: int64
+        startsAt:
+          type: string
+          format: date-time
+    BasicResponseListString:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            type: string
+        error:
+          $ref: '#/components/schemas/BasicError'
