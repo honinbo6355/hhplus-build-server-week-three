@@ -74,7 +74,7 @@
 - 동시에 여러 사용자가 예약 요청을 했을 때, 좌석이 중복으로 배정 가능하지 않도록 합니다.
 
 # ERD
-https://private-user-images.githubusercontent.com/29749722/319675243-89e36c04-8309-4eda-9dc1-d236355f6ee2.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTIyNDc5MzgsIm5iZiI6MTcxMjI0NzYzOCwicGF0aCI6Ii8yOTc0OTcyMi8zMTk2NzUyNDMtODllMzZjMDQtODMwOS00ZWRhLTlkYzEtZDIzNjM1NWY2ZWUyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA0MDQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNDA0VDE2MjAzOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTdkYjI1NzY4MDA5MDQ0Yjk1NzM0MDIwMzRmYmIwODlkOWUxOTEwNTE4MGNmNGQ4N2NlZTc2NDQ5YTU5NDQxZDUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.l8SNb_VHdBuX0C1RxoWfC68R6k8xGLkAfaxA_iyjYYA
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/f42db330-e649-48d9-bcaa-197c7aab802c)
 
 # Milestone
 - 하루=8h, 8*5일=40h
@@ -146,7 +146,7 @@ https://private-user-images.githubusercontent.com/29749722/319675243-89e36c04-83
 ```
 {
     "result": {
-        "userUuid": "550e8400-e29b-41d4-a716-446655440000"
+        "token": "550e8400-e29b-41d4-a716-446655440000"
     },
     "error": null
 }
@@ -159,7 +159,7 @@ https://private-user-images.githubusercontent.com/29749722/319675243-89e36c04-83
 - request header
    
 ```
-userUuid="550e8400-e29b-41d4-a716-446655440000",
+token="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 
@@ -182,7 +182,7 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 - request header
    
 ```
-userUuid="550e8400-e29b-41d4-a716-446655440000",
+token="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 
@@ -217,7 +217,7 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 - request header
 
 ```
-userUuid="550e8400-e29b-41d4-a716-446655440000",
+token="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 - response body
@@ -235,7 +235,7 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 - request header
    
 ```
-userUuid="550e8400-e29b-41d4-a716-446655440000",
+token="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 - request body
@@ -296,7 +296,7 @@ userUuid="550e8400-e29b-41d4-a716-446655440000",
 - request header
    
 ```
-userUuid="550e8400-e29b-41d4-a716-446655440000",
+token="550e8400-e29b-41d4-a716-446655440000",
 ```
 
 - request body
