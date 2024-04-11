@@ -133,6 +133,10 @@
 ### 결제
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/9f38d5ec-1e17-475b-965a-f078ac952ef6)
 
+## Swagger
+
+![FireShot Capture 001 - Swagger UI - localhost](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/bf4f347b-efdd-4e13-8223-959a78c3011c)
+
 ## API Interface
 
 ### 유저 토큰 발급 API
