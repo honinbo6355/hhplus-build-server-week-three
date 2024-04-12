@@ -5,6 +5,7 @@ import com.example.hhplus.reservation.api.reservation.dto.ReservationRequest;
 import com.example.hhplus.reservation.api.reservation.dto.ReservationResponse;
 import com.example.hhplus.reservation.domain.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<BasicResponse<ReservationResponse>> createReservation(@RequestBody ReservationRequest reservationRequest) {
-        return null;
+        ReservationResponse reservationResponse = reservationService.createReservation(reservationRequest.concertDetailId(), reservationRequest.userId(), reservationRequest.seatId());
+        return new ResponseEntity<>(new BasicResponse<>(reservationResponse, null), HttpStatus.OK);
     }
 }

@@ -5,7 +5,8 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ErrorCode {
-    INVALID_POINT(HttpStatus.BAD_REQUEST, "100", "잘못된 포인트 금액입니다.");
+    INVALID_POINT(HttpStatus.BAD_REQUEST, "100", "잘못된 포인트 금액입니다."),
+    ALREADY_RESERVED(HttpStatus.BAD_REQUEST, "101", "이미 예약했거나 예약중입니다.");
 
     private final HttpStatus status;
     private final String code;
