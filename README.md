@@ -74,7 +74,7 @@
 - 동시에 여러 사용자가 예약 요청을 했을 때, 좌석이 중복으로 배정 가능하지 않도록 합니다.
 
 # ERD
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/f42db330-e649-48d9-bcaa-197c7aab802c)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cfdffede-c105-4db7-bcd8-07a147d122a5)
 
 # Milestone
 - 하루=8h, 8*5일=40h
@@ -122,7 +122,7 @@
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/a3e0e445-56c6-44ca-8aa1-446ebc0597cf)
 
 ### 좌석 예약 요청
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/f9a63529-1037-4cf8-a47a-fce43688bf8e)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/1f503db0-36c5-45ac-868f-d4fd8f41b13c)
 
 ### 잔액 충전
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/300e6f19-0942-4c32-89cb-a9320770e7b6)
@@ -311,6 +311,7 @@ token="550e8400-e29b-41d4-a716-446655440000",
 ```
 {
     "reservationId": 1,
+    "userId": 1,
     "point": 5000
 }
 ```
