@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class PaymentController {
 
     @PostMapping
-    public ResponseEntity<BasicResponse<PaymentResponse>> createPayment(@RequestHeader String userUuid, @RequestBody PaymentRequest paymentRequest) {
+    public ResponseEntity<BasicResponse<PaymentResponse>> createPayment(@RequestBody PaymentRequest paymentRequest) {
         return null;
     }
 }

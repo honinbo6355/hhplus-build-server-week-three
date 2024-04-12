@@ -1,5 +1,8 @@
 package com.example.hhplus.reservation.api.reservation.dto;
 
-public class ReservationRequest {
+public record ReservationRequest (
+        long concertDetailId,
+        long seatId
+) {
 
 }
