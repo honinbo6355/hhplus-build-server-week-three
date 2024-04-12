@@ -74,7 +74,7 @@
 - 동시에 여러 사용자가 예약 요청을 했을 때, 좌석이 중복으로 배정 가능하지 않도록 합니다.
 
 # ERD
-<img width="1407" alt="image" src="https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/4744245b-eba4-4e6a-9ef3-64345c222b74">
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cfdffede-c105-4db7-bcd8-07a147d122a5)
 
 # Milestone
 - 하루=8h, 8*5일=40h
