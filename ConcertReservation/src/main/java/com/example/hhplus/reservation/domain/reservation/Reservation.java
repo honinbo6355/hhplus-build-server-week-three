@@ -20,14 +20,16 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
+    private LocalDateTime reserveAt;
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    public Reservation(Long concertDetailId, Long seatId, Long userId, ReservationStatus status) {
+    public Reservation(Long concertDetailId, Long seatId, Long userId, ReservationStatus status, LocalDateTime reserveAt) {
         this.concertDetailId = concertDetailId;
         this.seatId = seatId;
         this.userId = userId;
         this.status = status;
+        this.reserveAt = reserveAt;
     }
 
     public boolean isReserved() {

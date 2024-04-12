@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(schema = "test", name = "reservation",
         uniqueConstraints = {
@@ -30,13 +32,15 @@ public class ReservationEntity extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
+    private LocalDateTime reserveAt;
+
     public Reservation toDomain() {
-        return new Reservation(id, concertDetailId, seatId, userId, status, getCreatedAt(), getUpdatedAt());
+        return new Reservation(id, concertDetailId, seatId, userId, status, reserveAt, getCreatedAt(), getUpdatedAt());
     }
 
     public static ReservationEntity toEntity(Reservation reservation) {
         ReservationEntity reservationEntity = new ReservationEntity(reservation.getId(), reservation.getConcertDetailId(),
-                reservation.getSeatId(), reservation.getUserId(), reservation.getStatus());
+                reservation.getSeatId(), reservation.getUserId(), reservation.getStatus(), reservation.getReserveAt());
         return reservationEntity;
     }
 }

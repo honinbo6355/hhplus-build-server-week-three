@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public class ReservationServiceTest {
         long seatId = 5L;
         long userId = 1L;
 
-        Reservation reservation = new Reservation(concertDetailId, seatId, userId, ReservationStatus.IN_PROGRESS);
+        Reservation reservation = new Reservation(concertDetailId, seatId, userId, ReservationStatus.IN_PROGRESS, LocalDateTime.now());
 
         // when
         when(reservationRepository.findByConcertDetailIdAndSeatId(concertDetailId, seatId))
@@ -56,7 +57,7 @@ public class ReservationServiceTest {
         long concertDetailId = 1L;
         long seatId = 5L;
         long userId = 1L;
-        Reservation reservation = new Reservation(concertDetailId, seatId, 2L, ReservationStatus.IN_PROGRESS);
+        Reservation reservation = new Reservation(concertDetailId, seatId, 2L, ReservationStatus.IN_PROGRESS, LocalDateTime.now());
 
         // when
         when(reservationRepository.findByConcertDetailIdAndSeatId(concertDetailId, seatId))

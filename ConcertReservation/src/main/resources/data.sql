@@ -65,7 +65,7 @@ insert into test.users (id, name, amount, created_at, updated_at) values (1, '�
 insert into test.users (id, name, amount, created_at, updated_at) values (2, '유저2', 0, now(), now());
 insert into test.users (id, name, amount, created_at, updated_at) values (3, '유저3', 0, now(), now());
 
-insert into test.reservation (concert_detail_id, seat_id, user_id, status, created_at, updated_at) values (1, 4, 1, 'COMPLETED', now(), now());
-insert into test.reservation (concert_detail_id, seat_id, user_id, status, created_at, updated_at) values (1, 12, 1, 'COMPLETED', now(), now());
-insert into test.reservation (concert_detail_id, seat_id, user_id, status, created_at, updated_at) values (1, 15, 2, 'IN_PROGRESS', now(), now());
-insert into test.reservation (concert_detail_id, seat_id, user_id, status, created_at, updated_at) values (1, 20, 2, 'CANCELLED', now(), now());
+insert into test.reservation (concert_detail_id, seat_id, user_id, status, reserve_at, created_at, updated_at) values (1, 4, 1, 'COMPLETED', now(), now(), now());
+insert into test.reservation (concert_detail_id, seat_id, user_id, status, reserve_at, created_at, updated_at) values (1, 12, 1, 'COMPLETED', now(), now(), now());
+insert into test.reservation (concert_detail_id, seat_id, user_id, status, reserve_at, created_at, updated_at) values (1, 15, 2, 'IN_PROGRESS', now(), now(), now());
+insert into test.reservation (concert_detail_id, seat_id, user_id, status, reserve_at, created_at, updated_at) values (1, 20, 2, 'CANCELLED', now(), now(), now());
