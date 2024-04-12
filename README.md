@@ -94,15 +94,18 @@
 6. 좌석 예약 요청 API : 5h ( ~ 4월10일) <br/>
    6-1. API 구현 <br/>
    6-2. 유닛 테스트 <br/>
-7. 유저 토큰 발급 API : 12h ( ~ 4월12일) <br/>
+7. 결제 API : 5h ( ~ 4월11일) <br/>
    7-1. API 구현 <br/>
    7-2. 유닛 테스트 <br/>
+8. 유저 토큰 발급 API : 12h ( ~ 4월12일) <br/>
+   8-1. API 구현 <br/>
+   8-2. 유닛 테스트 <br/>
 
 =============== 다음 주차 =============== </br>
-8. 좌석 임시 배정 5분 검증 Polling 구현 <br/> <br/>
-9. 잔여 시간 검증 Polling 구현 <br/> <br/>
-10. dummy 대기열 추가 Polling 구현 <br/> <br/>
-11. 통합테스트 <br/> <br/>
+9. 좌석 임시 배정 5분 검증 Polling 구현 <br/> <br/>
+10. 잔여 시간 검증 Polling 구현 <br/> <br/>
+11. dummy 대기열 추가 Polling 구현 <br/> <br/>
+12. 통합테스트 <br/> <br/>
 
 ## Sequence Diagram
 
@@ -129,6 +132,10 @@
 
 ### 결제
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/9f38d5ec-1e17-475b-965a-f078ac952ef6)
+
+## Swagger
+
+![FireShot Capture 001 - Swagger UI - localhost](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/bf4f347b-efdd-4e13-8223-959a78c3011c)
 
 ## API Interface
 
@@ -223,7 +230,7 @@ token="550e8400-e29b-41d4-a716-446655440000",
 - response body
 ```
 {
-    "result": ["S1", "S3", "S5"],
+    "result": [1, 2, 3],
     "error": null
 }
 ```
@@ -242,7 +249,7 @@ token="550e8400-e29b-41d4-a716-446655440000",
 ```
 {
     "concertDetailId": 1,
-    "seatNum": "S1"
+    "seatId": 1
 }
 ```
 
