@@ -15,4 +15,10 @@ public class Payment {
 
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
+
+    public Payment(Long reservationId, long amount, PaymentStatus status) {
+        this.reservationId = reservationId;
+        this.amount = amount;
+        this.status = status;
+    }
 }

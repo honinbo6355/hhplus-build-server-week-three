@@ -31,14 +31,14 @@ public class ReservationServiceTest {
     private ReservationRepository reservationRepository;
 
     @Test
-    @DisplayName("좌석_예약_요청_성공할경우")
-    public void 좌석_예약_요청_성공할경우() throws Exception {
+    @DisplayName("좌석_예약_요청_성공")
+    public void 좌석_예약_요청_성공() throws Exception {
         // given
         long concertDetailId = 1L;
         long seatId = 5L;
         long userId = 1L;
 
-        Reservation reservation = new Reservation(concertDetailId, seatId, userId, ReservationStatus.IN_PROGRESS, LocalDateTime.now());
+        Reservation reservation = new Reservation(1L, concertDetailId, seatId, userId, ReservationStatus.IN_PROGRESS, LocalDateTime.now());
 
         // when
         when(reservationRepository.findByConcertDetailIdAndSeatId(concertDetailId, seatId))
@@ -51,13 +51,13 @@ public class ReservationServiceTest {
     }
 
     @Test
-    @DisplayName("이미_예약중인경우")
-    public void 이미_예약중인경우() throws Exception {
+    @DisplayName("이미_예약중인경우_실패")
+    public void 이미_예약중인경우_실패() throws Exception {
         // given
         long concertDetailId = 1L;
         long seatId = 5L;
         long userId = 1L;
-        Reservation reservation = new Reservation(concertDetailId, seatId, 2L, ReservationStatus.IN_PROGRESS, LocalDateTime.now());
+        Reservation reservation = new Reservation(1L, concertDetailId, seatId, 2L, ReservationStatus.IN_PROGRESS, LocalDateTime.now());
 
         // when
         when(reservationRepository.findByConcertDetailIdAndSeatId(concertDetailId, seatId))

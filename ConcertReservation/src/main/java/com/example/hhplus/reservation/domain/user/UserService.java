@@ -17,6 +17,9 @@ public class UserService {
     @Transactional
     public PointChargeResponse chargePoint(long userId, long point) {
         User user = userRepository.findById(userId);
+        if (user == null) {
+            throw new NullPointerException();
+        }
         user.charge(point);
         userRepository.save(user);
         pointHistoryRepository.save(new PointHistory(userId, TransactionType.CHARGE, point));
@@ -26,6 +29,9 @@ public class UserService {
     @Transactional(readOnly = true)
     public User getPoint(long userId) {
         User user = userRepository.findById(userId);
+        if (user == null) {
+            throw new NullPointerException();
+        }
         return user;
     }
 }

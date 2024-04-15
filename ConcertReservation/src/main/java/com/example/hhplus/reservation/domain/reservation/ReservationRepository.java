@@ -9,4 +9,6 @@ public interface ReservationRepository {
     Optional<Reservation> findByConcertDetailIdAndSeatId(long concertDetailId, long seatId);
 
     Reservation save(Reservation reservation);
+
+    Reservation findById(long reservationId);
 }

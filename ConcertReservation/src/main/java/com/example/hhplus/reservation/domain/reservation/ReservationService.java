@@ -21,7 +21,7 @@ public class ReservationService {
         Reservation reservation = reservationRepository.findByConcertDetailIdAndSeatId(concertDetailId, seatId)
                 .orElse(null);
         if (reservation == null) {
-            reservationRepository.save(new Reservation(concertDetailId, seatId, userId, ReservationStatus.IN_PROGRESS, LocalDateTime.now()));
+            reservationRepository.save(new Reservation(null, concertDetailId, seatId, userId, ReservationStatus.IN_PROGRESS, LocalDateTime.now()));
         } else if (reservation.isReserved()) {
             throw new CustomException(ErrorCode.ALREADY_RESERVED);
         } else if (ReservationStatus.CANCELLED == reservation.getStatus()) {

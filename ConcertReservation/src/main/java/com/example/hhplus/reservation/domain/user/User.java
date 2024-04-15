@@ -28,4 +28,11 @@ public class User {
         }
         this.amount += point;
     }
+
+    public void use(long point) {
+        if (amount < point) {
+            throw new CustomException(ErrorCode.SHORTAGE_POINT);
+        }
+        this.amount -= point;
+    }
 }

@@ -1,5 +1,9 @@
 package com.example.hhplus.reservation.infrastructure.payment;
 
-public interface PaymentJpaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PaymentJpaRepository extends JpaRepository<PaymentEntity, Long> {
 
 }

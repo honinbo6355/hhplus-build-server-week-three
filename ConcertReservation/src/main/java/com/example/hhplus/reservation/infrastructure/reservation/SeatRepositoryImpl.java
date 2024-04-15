@@ -1,5 +1,6 @@
 package com.example.hhplus.reservation.infrastructure.reservation;
 
+import com.example.hhplus.reservation.domain.reservation.Seat;
 import com.example.hhplus.reservation.domain.reservation.SeatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,5 +16,12 @@ public class SeatRepositoryImpl implements SeatRepository {
     @Override
     public List<Long> findIdAll() {
         return seatJpaRepository.findIdAll();
+    }
+
+    @Override
+    public Seat findById(long seatId) {
+        return seatJpaRepository.findById(seatId)
+                .map(SeatEntity::toDomain)
+                .orElse(null);
     }
 }

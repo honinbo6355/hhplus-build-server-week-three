@@ -31,8 +31,8 @@ public class ReservationControllerTest {
     private ReservationService reservationService;
 
     @Test
-    @DisplayName("좌석_예약_요청_성공할경우")
-    public void 좌석_예약_요청_성공할경우() throws Exception {
+    @DisplayName("좌석_예약_요청_성공")
+    public void 좌석_예약_요청_성공() throws Exception {
         // given
         long concertDetailId = 1L;
         long seatId = 5L;
@@ -53,8 +53,8 @@ public class ReservationControllerTest {
     }
 
     @Test
-    @DisplayName("이미_예약중인경우")
-    public void 이미_예약중인경우() throws Exception {
+    @DisplayName("이미_예약중인경우_실패")
+    public void 이미_예약중인경우_실패() throws Exception {
         // given
         long concertDetailId = 1L;
         long seatId = 5L;

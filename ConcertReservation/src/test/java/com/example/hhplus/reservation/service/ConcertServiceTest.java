@@ -41,8 +41,8 @@ public class ConcertServiceTest {
     private ReservationRepository reservationRepository;
 
     @Test
-    @DisplayName("예약_가능_날짜_조회")
-    public void 예약_가능_날짜_조회() throws Exception {
+    @DisplayName("예약_가능_날짜_조회_성공")
+    public void 예약_가능_날짜_조회_성공() throws Exception {
         // given
         Long concertId = 1L;
         Concert concert = new Concert(1L, "아이유 콘서트");
@@ -64,8 +64,8 @@ public class ConcertServiceTest {
     }
 
     @Test
-    @DisplayName("예약_가능_좌석_조회")
-    public void 예약_가능_좌석_조회() throws Exception {
+    @DisplayName("예약_가능_좌석_조회_성공")
+    public void 예약_가능_좌석_조회_성공() throws Exception {
         // given
         int num = 50;
         Long concertDetailId = 1L;

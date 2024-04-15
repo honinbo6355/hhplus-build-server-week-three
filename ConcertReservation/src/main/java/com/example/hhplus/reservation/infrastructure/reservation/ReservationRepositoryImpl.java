@@ -30,4 +30,11 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     public Reservation save(Reservation reservation) {
         return reservationJpaRepository.save(ReservationEntity.toEntity(reservation)).toDomain();
     }
+
+    @Override
+    public Reservation findById(long reservationId) {
+        return reservationJpaRepository.findById(reservationId)
+                .map(ReservationEntity::toDomain)
+                .orElse(null);
+    }
 }

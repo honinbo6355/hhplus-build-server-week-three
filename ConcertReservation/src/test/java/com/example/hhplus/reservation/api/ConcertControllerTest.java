@@ -32,8 +32,8 @@ public class ConcertControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("예약_가능_날짜_조회")
-    public void 예약_가능_날짜_조회() throws Exception {
+    @DisplayName("예약_가능_날짜_조회_성공")
+    public void 예약_가능_날짜_조회_성공() throws Exception {
         // given
         Long concertId = 1L;
         String concertName = "아이유 콘서트";
@@ -58,8 +58,8 @@ public class ConcertControllerTest {
     }
 
     @Test
-    @DisplayName("예약_가능_좌석_조회")
-    public void 예약_가능_좌석_조회() throws Exception {
+    @DisplayName("예약_가능_좌석_조회_성공")
+    public void 예약_가능_좌석_조회_성공() throws Exception {
         // given
         Long concertDetailId = 1L;
         List<Long> seatIds = List.of(1L, 2L, 3L, 4L);

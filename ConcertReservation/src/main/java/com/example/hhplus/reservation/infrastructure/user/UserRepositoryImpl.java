@@ -12,9 +12,9 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findById(long userId) {
-        UserEntity userEntity = userJpaRepository.findById(userId)
-                .orElseThrow(NullPointerException::new);
-        return userEntity.toDomain();
+        return userJpaRepository.findById(userId)
+                .map(UserEntity::toDomain)
+                .orElse(null);
     }
 
     @Override

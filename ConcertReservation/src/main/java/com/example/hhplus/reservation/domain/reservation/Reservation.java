@@ -24,7 +24,8 @@ public class Reservation {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    public Reservation(Long concertDetailId, Long seatId, Long userId, ReservationStatus status, LocalDateTime reserveAt) {
+    public Reservation(Long id, Long concertDetailId, Long seatId, Long userId, ReservationStatus status, LocalDateTime reserveAt) {
+        this.id = id;
         this.concertDetailId = concertDetailId;
         this.seatId = seatId;
         this.userId = userId;
@@ -34,5 +35,9 @@ public class Reservation {
 
     public boolean isReserved() {
         return ReservationStatus.IN_PROGRESS == status || ReservationStatus.COMPLETED == status;
+    }
+
+    public boolean isReserveUser(long userId) {
+        return this.userId == userId;
     }
 }

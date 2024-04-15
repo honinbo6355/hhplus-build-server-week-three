@@ -28,8 +28,8 @@ public class UserServiceTest {
     private PointHistoryRepository pointHistoryRepository;
 
     @Test
-    @DisplayName("충전_성공할경우")
-    public void 충전_성공할경우() throws Exception {
+    @DisplayName("충전_정상일경우_성공")
+    public void 충전_정상일경우_성공() throws Exception {
         // given
         long userId = 1L;
         long point = 3000L;
@@ -49,8 +49,8 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("_0_이하_포인트_충전할경우")
-    public void _0_이하_포인트_충전할경우() throws Exception {
+    @DisplayName("_0_이하_포인트_충전할경우_실패")
+    public void _0_이하_포인트_충전할경우_실패() throws Exception {
         // given
         long userId = 1L;
         long point = 3000L;
@@ -67,8 +67,8 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("잔액_조회_성공할경우")
-    public void 잔액_조회_성공할경우() throws Exception {
+    @DisplayName("잔액_조회_성공")
+    public void 잔액_조회_성공() throws Exception {
         // given
         long userId = 1L;
         User user = new User(userId, "유저1", 5000L);

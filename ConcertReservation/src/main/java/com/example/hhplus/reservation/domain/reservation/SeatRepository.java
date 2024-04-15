@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface SeatRepository {
     List<Long> findIdAll();
+    Seat findById(long seatId);
 }
