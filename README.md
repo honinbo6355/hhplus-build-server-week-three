@@ -153,7 +153,7 @@
 ```
 {
     "result": {
-        "token": "550e8400-e29b-41d4-a716-446655440000"
+        "token": "550e8400-e29b-41d4-a716-446655440000" // or null(대기열에 추가된경우)
     },
     "error": null
 }
@@ -161,22 +161,16 @@
 
 ### 유저 토큰 조회 API
 
-**GET /api/users/token**
-
-- request header
-   
-```
-token="550e8400-e29b-41d4-a716-446655440000",
-```
-
+**GET /api/users/{userId}/token**
 
 - response body
 ```
 {
     "result": {
-        "waitingCount": 50, // 앞에 대기중인 유저수
-        "rank": 15, // 내 순서
-        "status": "WAITING" // WAITING이면 대기, IN_PROGRESS면 진입
+        "waitingCount": 50, // or null(발급된경우)
+        "rank": 15, // or null(발급된경우)
+        "token": "550e8400-e29b-41d4-a716-446655440000", // or null(대기열에 추가된경우)
+        "status": "WAITING" // WAITING이면 대기, IN_PROGRESS면 진입, FINISHED면 만료
     },
     "error": null
 }
