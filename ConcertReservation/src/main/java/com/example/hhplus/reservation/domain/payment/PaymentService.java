@@ -1,6 +1,8 @@
 package com.example.hhplus.reservation.domain.payment;
 
 import com.example.hhplus.reservation.api.payment.dto.PaymentResponse;
+import com.example.hhplus.reservation.domain.concert.ConcertDetail;
+import com.example.hhplus.reservation.domain.concert.ConcertDetailRepository;
 import com.example.hhplus.reservation.domain.reservation.*;
 import com.example.hhplus.reservation.domain.user.*;
 import com.example.hhplus.reservation.exception.CustomException;
@@ -18,6 +20,7 @@ public class PaymentService {
     private final UserRepository userRepository;
     private final PaymentRepository paymentRepository;
     private final SeatRepository seatRepository;
+    private final ConcertDetailRepository concertDetailRepository;
 
     // TODO 토큰 만료 처리
     @Transactional
@@ -49,6 +52,12 @@ public class PaymentService {
         user.use(point);
         userRepository.save(user);
         paymentRepository.save(new Payment(reservationId, point, PaymentStatus.SUCCESSED));
+        ConcertDetail concertDetail = concertDetailRepository.findById(reservation.getConcertDetailId());
+        if (concertDetail == null) {
+            throw new NullPointerException();
+        }
+        concertDetail.increaseReservedSeatNum();
+        concertDetailRepository.save(concertDetail);
 
         return PaymentResponse.SUCCESS;
     }

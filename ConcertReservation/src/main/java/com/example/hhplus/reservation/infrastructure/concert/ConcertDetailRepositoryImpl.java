@@ -22,4 +22,16 @@ public class ConcertDetailRepositoryImpl implements ConcertDetailRepository {
                 .map(ConcertDetailEntity::toDomain)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public ConcertDetail findById(long concertDetailId) {
+        return concertDetailJpaRepository.findById(concertDetailId)
+                .map(ConcertDetailEntity::toDomain)
+                .orElse(null);
+    }
+
+    @Override
+    public ConcertDetail save(ConcertDetail concertDetail) {
+        return concertDetailJpaRepository.save(ConcertDetailEntity.toEntity(concertDetail)).toDomain();
+    }
 }

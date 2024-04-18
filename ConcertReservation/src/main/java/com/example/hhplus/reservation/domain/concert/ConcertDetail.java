@@ -23,4 +23,8 @@ public class ConcertDetail {
         this.maxSeatNum = maxSeatNum;
         this.reservedSeatNum = reservedSeatNum;
     }
+
+    public void increaseReservedSeatNum() {
+        reservedSeatNum++;
+    }
 }

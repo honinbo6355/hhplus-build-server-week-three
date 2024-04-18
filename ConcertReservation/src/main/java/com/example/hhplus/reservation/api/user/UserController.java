@@ -18,12 +18,13 @@ public class UserController {
 
     @PostMapping("/token")
     public ResponseEntity<BasicResponse<TokenResponse>> createToken(@RequestBody TokenRequest tokenRequest) {
-        return null;
+        String token = userService.createToken(tokenRequest.userId());
+        return new ResponseEntity<>(new BasicResponse<>(new TokenResponse(token), null), HttpStatus.OK);
     }
 
-    @GetMapping("/token")
-    public ResponseEntity<BasicResponse<TokenDetailResponse>> getTokenDetail(@RequestHeader String token) {
-        return null;
+    @GetMapping("/{userId}/token")
+    public ResponseEntity<BasicResponse<TokenDetailResponse>> getTokenDetail(@PathVariable Long userId) {
+        return new ResponseEntity<>(new BasicResponse<>(userService.getTokenDetail(userId), null), HttpStatus.OK);
     }
 
     @PatchMapping("/point")
