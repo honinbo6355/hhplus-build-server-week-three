@@ -167,7 +167,6 @@
 ```
 {
     "result": {
-        "waitingCount": 50, // or null(발급된경우)
         "rank": 15, // or null(발급된경우)
         "token": "550e8400-e29b-41d4-a716-446655440000", // or null(대기열에 추가된경우)
         "status": "WAITING" // WAITING이면 대기, IN_PROGRESS면 진입, FINISHED면 만료
