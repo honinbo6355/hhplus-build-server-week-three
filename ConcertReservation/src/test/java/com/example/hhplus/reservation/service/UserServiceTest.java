@@ -12,6 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.UUID;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -26,6 +30,12 @@ public class UserServiceTest {
 
     @Mock
     private PointHistoryRepository pointHistoryRepository;
+
+    @Mock
+    private ReservationTokenRepository reservationTokenRepository;
+
+    @Mock
+    private ReservationQueueRepository reservationQueueRepository;
 
     @Test
     @DisplayName("충전_정상일경우_성공")
@@ -81,5 +91,71 @@ public class UserServiceTest {
 
         Assertions.assertThat(resultUser.getId()).isEqualTo(user.getId());
         Assertions.assertThat(resultUser.getAmount()).isEqualTo(user.getAmount());
+    }
+
+    @Test
+    @DisplayName("존재하지않는_유저일경우_토큰_발급_실패")
+    public void 존재하지않는_유저일경우_토큰_발급_실패() {
+        // given
+        long userId = 1L;
+
+        // when
+        when(userRepository.findById(userId)).thenThrow(new NullPointerException());
+
+        // then
+        Assertions.assertThatThrownBy(() -> {
+            userService.createToken(userId);
+        }).isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    @DisplayName("토큰_존재하는_유저일경우_발급_성공")
+    public void 토큰_존재하는_유저일경우_발급_성공() {
+        // given
+        long userId = 1L;
+        ReservationToken reservationToken = new ReservationToken(UUID.randomUUID().toString(), ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now());
+
+        // when
+        when(userRepository.findById(userId)).thenReturn(new User(userId, "유저1", 5000L));
+        when(reservationTokenRepository.findByUserId(userId)).thenReturn(Optional.ofNullable(reservationToken));
+
+        // then
+        String token = userService.createToken(userId);
+
+        Assertions.assertThat(token).isEqualTo(reservationToken.getTokenValue());
+    }
+
+    @Test
+    @DisplayName("토큰_존재하는_유저일경우_발급_성공")
+    public void 처음_토큰_발급하는경우_대기열_추가_성공() {
+        // given
+        long userId = 1L;
+
+        // when
+        when(userRepository.findById(userId)).thenReturn(new User(userId, "유저1", 5000L));
+        when(reservationTokenRepository.findByUserId(userId)).thenReturn(Optional.ofNullable(null));
+        when(reservationQueueRepository.findByUserId(userId)).thenReturn(Optional.ofNullable(null));
+
+        // then
+        String token = userService.createToken(userId);
+        Assertions.assertThat(token).isEqualTo(null);
+    }
+
+    @Test
+    @DisplayName("토큰_재발급하는경우_대기열_추가_성공")
+    public void 토큰_재발급하는경우_대기열_추가_성공() {
+        // given
+        long userId = 1L;
+        ReservationQueue reservationQueue = new ReservationQueue(ReservationQueueStatus.DONE, userId);
+
+        // when
+        when(userRepository.findById(userId)).thenReturn(new User(userId, "유저1", 5000L));
+        when(reservationTokenRepository.findByUserId(userId)).thenReturn(Optional.ofNullable(null));
+        when(reservationQueueRepository.findByUserId(userId)).thenReturn(Optional.ofNullable(reservationQueue));
+
+        // then
+        String token = userService.createToken(userId);
+        Assertions.assertThat(token).isEqualTo(null);
+        Assertions.assertThat(reservationQueue.getStatus()).isEqualTo(ReservationQueueStatus.WAITING);
     }
 }

@@ -9,5 +9,4 @@ import java.util.Optional;
 @Repository
 public interface ReservationTokenJpaRepository extends JpaRepository<ReservationTokenEntity, Long> {
     Optional<ReservationTokenEntity> findByUserId(long userId);
-    int countByStatus(ReservationTokenStatus status);
 }

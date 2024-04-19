@@ -49,37 +49,24 @@ public class UserService {
             throw new NullPointerException();
         }
 
+        ReservationToken reservationToken = reservationTokenRepository.findByUserId(userId) // 유저 토큰 조회
+                .orElse(null);
+        if (reservationToken != null && reservationToken.getStatus() == ReservationTokenStatus.IN_PROGRESS) {
+            return reservationToken.getTokenValue();
+        }
+
         // 유저 대기열 조회
         ReservationQueue reservationQueue = reservationQueueRepository.findByUserId(userId)
                 .orElse(null);
-        ReservationToken reservationToken = reservationTokenRepository.findByUserId(userId) // 유저 토큰 조회
-                .orElse(null);
-        String token = null;
-
-        if (reservationToken != null && reservationToken.getStatus() == ReservationTokenStatus.IN_PROGRESS) {
-            token = reservationToken.getTokenValue();
-            return token;
-        }
-
         if (reservationQueue == null) { // 유저 대기열이 존재하지않는다면
-            int inProgressCount = reservationTokenRepository.countByStatus(ReservationTokenStatus.IN_PROGRESS); // 토큰 발급 수량 조회
-            if (ReservationToken.MAX_IN_PROGRESS_SIZE > inProgressCount) { // 토큰 수량이 여유가 있다면
-                if (reservationToken == null) { // 유저 토큰이 존재하지않는다면
-                    reservationToken = new ReservationToken(UUID.randomUUID().toString(), ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now());
-                } else if (reservationToken.getStatus() == ReservationTokenStatus.FINISHED) { // 유저 토큰이 만료되었다면
-                    reservationToken.inProgress();
-                }
-                reservationTokenRepository.save(reservationToken);
-                token = reservationToken.getTokenValue();
-            } else { // 토큰 수량이 여유가 없다면
-                reservationQueueRepository.save(new ReservationQueue(ReservationQueueStatus.WAITING, userId));
-            }
+            reservationQueue = new ReservationQueue(ReservationQueueStatus.WAITING, userId);
         } else if (reservationQueue.getStatus() == ReservationQueueStatus.DONE) { // 유저 대기열이 DONE 상태라면
             reservationQueue.setStatus(ReservationQueueStatus.WAITING);
-            reservationQueueRepository.save(reservationQueue);
         }
 
-        return token;
+        reservationQueueRepository.save(reservationQueue);
+
+        return null;
     }
 
     @Transactional(readOnly = true)

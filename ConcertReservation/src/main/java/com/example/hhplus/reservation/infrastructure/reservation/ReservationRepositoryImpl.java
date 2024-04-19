@@ -6,6 +6,7 @@ import com.example.hhplus.reservation.domain.reservation.ReservationStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,5 +37,10 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         return reservationJpaRepository.findById(reservationId)
                 .map(ReservationEntity::toDomain)
                 .orElse(null);
+    }
+
+    @Override
+    public int cancelReservation(ReservationStatus updateStatus, ReservationStatus status, LocalDateTime targetDateTime, LocalDateTime updatedAt) {
+        return reservationJpaRepository.cancelReservation(updateStatus, status, targetDateTime, updatedAt);
     }
 }

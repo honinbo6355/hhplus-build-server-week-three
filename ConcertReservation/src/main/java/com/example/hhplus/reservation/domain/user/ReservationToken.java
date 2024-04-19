@@ -21,6 +21,7 @@ public class ReservationToken {
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     public static final int MAX_IN_PROGRESS_SIZE = 8;
+    private static final int TOKEN_DURATION_MINUTE = 5;
 
     public ReservationToken(String tokenValue, ReservationTokenStatus status, Long userId, LocalDateTime issuedAt) {
         this.tokenValue = tokenValue;

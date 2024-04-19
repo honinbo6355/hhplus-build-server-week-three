@@ -6,6 +6,7 @@ import com.example.hhplus.reservation.domain.user.ReservationTokenStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class ReservationTokenRepositoryImpl implements ReservationTokenRepositor
     }
 
     @Override
-    public int countByStatus(ReservationTokenStatus status) {
-        return reservationTokenJpaRepository.countByStatus(status);
+    public int expireToken(LocalDateTime targetDateTime) {
+        return 0;
     }
 }
