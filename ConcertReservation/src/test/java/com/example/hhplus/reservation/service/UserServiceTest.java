@@ -1,7 +1,5 @@
 package com.example.hhplus.reservation.service;
 
-import com.example.hhplus.reservation.api.user.dto.PointChargeResponse;
-import com.example.hhplus.reservation.api.user.dto.PointResponse;
 import com.example.hhplus.reservation.domain.user.*;
 import com.example.hhplus.reservation.exception.CustomException;
 import org.assertj.core.api.Assertions;
@@ -53,8 +51,8 @@ public class UserServiceTest {
         when(pointHistoryRepository.save(any(PointHistory.class))).thenReturn(pointHistory);
 
         // then
-        PointChargeResponse pointChargeResponse = userService.chargePoint(userId, chargePoint);
-        Assertions.assertThat(pointChargeResponse).isEqualTo(PointChargeResponse.SUCCESS);
+        long pointHistoryId = userService.chargePoint(userId, chargePoint);
+        Assertions.assertThat(pointHistoryId).isEqualTo(pointHistory.getId());
         Assertions.assertThat(user.getAmount()).isEqualTo(point+chargePoint);
     }
 

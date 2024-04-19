@@ -4,6 +4,9 @@ import com.example.hhplus.reservation.api.concert.ConcertController;
 import com.example.hhplus.reservation.api.concert.dto.ConcertDateResponse;
 import com.example.hhplus.reservation.api.concert.dto.ConcertDetailDto;
 import com.example.hhplus.reservation.domain.concert.ConcertService;
+import com.example.hhplus.reservation.domain.user.ReservationToken;
+import com.example.hhplus.reservation.domain.user.ReservationTokenRepository;
+import com.example.hhplus.reservation.domain.user.ReservationTokenStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +20,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,6 +33,9 @@ public class ConcertControllerTest {
     @MockBean
     private ConcertService concertService;
 
+    @MockBean
+    private ReservationTokenRepository reservationTokenRepository;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -35,6 +43,7 @@ public class ConcertControllerTest {
     @DisplayName("예약_가능_날짜_조회_성공")
     public void 예약_가능_날짜_조회_성공() throws Exception {
         // given
+        String token = "97ef7717-2bcd-4e23-9e7a-3d9bfa4ea5dd";
         Long concertId = 1L;
         String concertName = "아이유 콘서트";
         List<ConcertDetailDto> concertInfos = new ArrayList<>();
@@ -46,10 +55,12 @@ public class ConcertControllerTest {
         ConcertDateResponse concertDateResponse = new ConcertDateResponse(concertName, concertInfos);
 
         // when
+        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, anyLong(), LocalDateTime.now())));
         when(concertService.getConcertDate(concertId)).thenReturn(concertDateResponse);
 
         // then
         mockMvc.perform(MockMvcRequestBuilders.get("/api/concert/" + concertId + "/date")
+                        .header("token", token)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -61,14 +72,17 @@ public class ConcertControllerTest {
     @DisplayName("예약_가능_좌석_조회_성공")
     public void 예약_가능_좌석_조회_성공() throws Exception {
         // given
+        String token = "97ef7717-2bcd-4e23-9e7a-3d9bfa4ea5dd";
         Long concertDetailId = 1L;
         List<Long> seatIds = List.of(1L, 2L, 3L, 4L);
 
         // when
+        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, anyLong(), LocalDateTime.now())));
         when(concertService.getConcertSeat(concertDetailId)).thenReturn(seatIds);
 
         // then
         mockMvc.perform(MockMvcRequestBuilders.get("/api/concert/" + concertDetailId + "/seat")
+                        .header("token", token)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())

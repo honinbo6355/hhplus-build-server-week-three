@@ -1,9 +1,6 @@
 package com.example.hhplus.reservation.api;
 
 import com.example.hhplus.reservation.api.user.UserController;
-import com.example.hhplus.reservation.api.user.dto.PointChargeRequest;
-import com.example.hhplus.reservation.api.user.dto.PointChargeResponse;
-import com.example.hhplus.reservation.api.user.dto.PointResponse;
 import com.example.hhplus.reservation.domain.user.User;
 import com.example.hhplus.reservation.domain.user.UserService;
 import com.example.hhplus.reservation.exception.CustomException;
@@ -20,7 +17,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -40,10 +36,11 @@ public class UserControllerTest {
         // given
         long userId = 1L;
         long point = 5000L;
+        long pointHistoryId = 5L;
         String requestJson = "{\"userId\":" + userId + ", \"point\":" + point + "}";
 
         // when
-        when(userService.chargePoint(userId, point)).thenReturn(PointChargeResponse.SUCCESS);
+        when(userService.chargePoint(userId, point)).thenReturn(pointHistoryId);
 
         // then
         mockMvc.perform(MockMvcRequestBuilders.patch("/api/users/point")
@@ -52,7 +49,7 @@ public class UserControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result").value(PointChargeResponse.SUCCESS.toString()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result").value(pointHistoryId));
     }
 
     @Test

@@ -1,6 +1,5 @@
 package com.example.hhplus.reservation.domain.payment;
 
-import com.example.hhplus.reservation.api.payment.dto.PaymentResponse;
 import com.example.hhplus.reservation.domain.concert.ConcertDetail;
 import com.example.hhplus.reservation.domain.concert.ConcertDetailRepository;
 import com.example.hhplus.reservation.domain.reservation.*;
@@ -21,10 +20,10 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final SeatRepository seatRepository;
     private final ConcertDetailRepository concertDetailRepository;
+    private final ReservationTokenRepository reservationTokenRepository;
 
-    // TODO 토큰 만료 처리
     @Transactional
-    public PaymentResponse createPayment(long reservationId, long userId, long point) {
+    public Long createPayment(long reservationId, long userId, long point) {
         Reservation reservation = reservationRepository.findById(reservationId);
         if (reservation == null) {
             throw new NullPointerException();
@@ -32,6 +31,7 @@ public class PaymentService {
         if (!reservation.isReserveUser(userId)) {
             throw new CustomException(ErrorCode.INVALID_USER);
         }
+
         Seat seat = seatRepository.findById(reservation.getSeatId());
         if (seat == null) {
             throw new NullPointerException();
@@ -42,23 +42,36 @@ public class PaymentService {
         if (reservation.getStatus() != ReservationStatus.IN_PROGRESS) {
             throw new CustomException(ErrorCode.INVALID_RESERVATION_STATUS);
         }
-        reservation.setStatus(ReservationStatus.COMPLETED);
-        reservationRepository.save(reservation);
-        pointHistoryRepository.save(new PointHistory(userId, TransactionType.USE, point));
+
         User user = userRepository.findById(userId);
         if (user == null) {
             throw new NullPointerException();
         }
-        user.use(point);
-        userRepository.save(user);
-        paymentRepository.save(new Payment(reservationId, point, PaymentStatus.SUCCESSED));
+
         ConcertDetail concertDetail = concertDetailRepository.findById(reservation.getConcertDetailId());
         if (concertDetail == null) {
             throw new NullPointerException();
         }
-        concertDetail.increaseReservedSeatNum();
-        concertDetailRepository.save(concertDetail);
 
-        return PaymentResponse.SUCCESS;
+        ReservationToken reservationToken = reservationTokenRepository.findByUserId(userId)
+                .orElse(null);
+        if (reservationToken == null) {
+            throw new NullPointerException();
+        }
+
+        reservation.setStatus(ReservationStatus.COMPLETED);
+        user.use(point);
+        concertDetail.increaseReservedSeatNum();
+        reservationToken.expire();
+
+        Payment payment = paymentRepository.save(new Payment(reservationId, point, PaymentStatus.SUCCESSED));
+
+        reservationRepository.save(reservation);
+        pointHistoryRepository.save(new PointHistory(userId, TransactionType.USE, point));
+        userRepository.save(user);
+        concertDetailRepository.save(concertDetail);
+        reservationTokenRepository.save(reservationToken);
+
+        return payment.getId();
     }
 }

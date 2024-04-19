@@ -10,5 +10,7 @@ import java.util.Optional;
 public interface ReservationTokenRepository {
     Optional<ReservationToken> findByUserId(long userId);
     ReservationToken save(ReservationToken reservationToken);
-    int expireToken(LocalDateTime targetDateTime);
+    int expireDurationOverToken(ReservationTokenStatus updateStatus, ReservationTokenStatus status, LocalDateTime targetDateTime, LocalDateTime updatedAt);
+    int countByStatus(ReservationTokenStatus status);
+    Optional<ReservationToken> findByTokenValueAndStatus(String token, ReservationTokenStatus status);
 }

@@ -10,7 +10,8 @@ public enum ErrorCode {
     INVALID_USER(HttpStatus.BAD_REQUEST, "102", "권한 없는 사용자입니다."),
     INVALID_PAYMENT_POINT(HttpStatus.BAD_REQUEST, "103", "잘못된 결제 금액입니다."),
     INVALID_RESERVATION_STATUS(HttpStatus.BAD_REQUEST, "104", "잘못된 예약 상태입니다."),
-    SHORTAGE_POINT(HttpStatus.BAD_REQUEST, "105", "유저 잔액이 부족합니다.");
+    SHORTAGE_POINT(HttpStatus.BAD_REQUEST, "105", "유저 잔액이 부족합니다."),
+    NOT_AUTHORITY(HttpStatus.BAD_REQUEST, "106", "접근 권한이 없습니다.");
 
     private final HttpStatus status;
     private final String code;

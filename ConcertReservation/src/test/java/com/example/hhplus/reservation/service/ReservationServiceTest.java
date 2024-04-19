@@ -1,6 +1,5 @@
 package com.example.hhplus.reservation.service;
 
-import com.example.hhplus.reservation.api.reservation.dto.ReservationResponse;
 import com.example.hhplus.reservation.domain.reservation.Reservation;
 import com.example.hhplus.reservation.domain.reservation.ReservationRepository;
 import com.example.hhplus.reservation.domain.reservation.ReservationService;
@@ -15,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -46,8 +44,8 @@ public class ReservationServiceTest {
         when(reservationRepository.save(any())).thenReturn(reservation);
 
         // then
-        ReservationResponse reservationResponse = reservationService.createReservation(concertDetailId, userId, seatId);
-        Assertions.assertThat(reservationResponse).isEqualTo(ReservationResponse.SUCCESS);
+        long reservationId = reservationService.createReservation(concertDetailId, userId, seatId);
+        Assertions.assertThat(reservationId).isEqualTo(reservation.getId());
     }
 
     @Test

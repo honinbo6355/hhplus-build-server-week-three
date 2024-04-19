@@ -11,7 +11,11 @@ import org.hibernate.annotations.GeneratorType;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(schema = "test", name = "concert_detail")
+@Table(schema = "test", name = "concert_detail",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "concert_detail_unique_key",
+                        columnNames = {"concertId", "startsAt"})
+        })
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

@@ -5,11 +5,9 @@ import com.example.hhplus.reservation.domain.concert.ConcertDetailRepository;
 import com.example.hhplus.reservation.domain.payment.Payment;
 import com.example.hhplus.reservation.domain.payment.PaymentRepository;
 import com.example.hhplus.reservation.domain.payment.PaymentService;
+import com.example.hhplus.reservation.domain.payment.PaymentStatus;
 import com.example.hhplus.reservation.domain.reservation.*;
-import com.example.hhplus.reservation.domain.user.PointHistory;
-import com.example.hhplus.reservation.domain.user.PointHistoryRepository;
-import com.example.hhplus.reservation.domain.user.User;
-import com.example.hhplus.reservation.domain.user.UserRepository;
+import com.example.hhplus.reservation.domain.user.*;
 import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
 import org.assertj.core.api.Assertions;
@@ -21,6 +19,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
@@ -48,6 +48,9 @@ public class PaymentServiceTest {
     @Mock
     private ConcertDetailRepository concertDetailRepository;
 
+    @Mock
+    private ReservationTokenRepository reservationTokenRepository;
+
     @Test
     @DisplayName("결제_성공")
     public void 결제_성공() throws Exception {
@@ -63,23 +66,30 @@ public class PaymentServiceTest {
         Reservation reservation = new Reservation(reservationId, concertDetailId, seatId, userId, ReservationStatus.IN_PROGRESS, LocalDateTime.now());
         User user = new User(userId, "유저1", amount);
         ConcertDetail concertDetail = new ConcertDetail(concertDetailId, 1L, LocalDateTime.now(), 50, reservedSeatNum);
+        ReservationToken reservationToken = new ReservationToken(UUID.randomUUID().toString(), ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now());
 
         // when
+        when(paymentRepository.save(any(Payment.class))).thenReturn(new Payment(reservationId, point, PaymentStatus.SUCCESSED));
         when(reservationRepository.findById(reservationId)).thenReturn(reservation);
         when(seatRepository.findById(reservation.getSeatId())).thenReturn(new Seat(seatId, point));
         when(userRepository.findById(userId)).thenReturn(user);
         when(concertDetailRepository.findById(reservation.getConcertDetailId())).thenReturn(concertDetail);
+        when(reservationTokenRepository.findByUserId(userId)).thenReturn(Optional.of(reservationToken));
+
         paymentService.createPayment(reservationId, userId, point);
 
         // then
         Assertions.assertThat(reservation.getStatus()).isEqualTo(ReservationStatus.COMPLETED);
         Assertions.assertThat(user.getAmount()).isEqualTo(amount-point);
         Assertions.assertThat(concertDetail.getReservedSeatNum()).isEqualTo(reservedSeatNum+1);
+        Assertions.assertThat(reservationToken.getStatus()).isEqualTo(ReservationTokenStatus.FINISHED);
+
         verify(reservationRepository, times(1)).save(reservation);
         verify(pointHistoryRepository, times(1)).save(any(PointHistory.class));
         verify(userRepository, times(1)).save(user);
         verify(paymentRepository, times(1)).save(any(Payment.class));
         verify(concertDetailRepository, times(1)).save(concertDetail);
+        verify(reservationTokenRepository, times(1)).save(reservationToken);
     }
 
     @Test

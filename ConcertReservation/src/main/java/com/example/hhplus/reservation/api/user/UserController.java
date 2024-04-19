@@ -28,9 +28,9 @@ public class UserController {
     }
 
     @PatchMapping("/point")
-    public ResponseEntity<BasicResponse<PointChargeResponse>> chargePoint(@RequestBody PointChargeRequest pointChargeRequest) {
-        PointChargeResponse pointChargeResponse = userService.chargePoint(pointChargeRequest.userId(), pointChargeRequest.point());
-        return new ResponseEntity<>(new BasicResponse<>(pointChargeResponse, null), HttpStatus.OK);
+    public ResponseEntity<BasicResponse<Long>> chargePoint(@RequestBody PointChargeRequest pointChargeRequest) {
+        long pointHistoryId = userService.chargePoint(pointChargeRequest.userId(), pointChargeRequest.point());
+        return new ResponseEntity<>(new BasicResponse<>(pointHistoryId, null), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/point")

@@ -20,8 +20,8 @@ public class ReservationToken {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    public static final int MAX_IN_PROGRESS_SIZE = 8;
-    private static final int TOKEN_DURATION_MINUTE = 5;
+    public static final int MAX_IN_PROGRESS_SIZE = 3;
+    public static final int TOKEN_DURATION_MINUTE = 5;
 
     public ReservationToken(String tokenValue, ReservationTokenStatus status, Long userId, LocalDateTime issuedAt) {
         this.tokenValue = tokenValue;
@@ -31,8 +31,16 @@ public class ReservationToken {
     }
 
     public void inProgress() {
+        LocalDateTime now = LocalDateTime.now();
+
         this.tokenValue = UUID.randomUUID().toString();
         this.status = ReservationTokenStatus.IN_PROGRESS;
-        this.issuedAt = LocalDateTime.now();
+        this.issuedAt = now;
+        this.updatedAt = now;
+    }
+
+    public void expire() {
+        this.status = ReservationTokenStatus.FINISHED;
+        this.updatedAt = LocalDateTime.now();
     }
 }

@@ -1,14 +1,11 @@
 package com.example.hhplus.reservation.api;
 
 import com.example.hhplus.reservation.api.payment.PaymentController;
-import com.example.hhplus.reservation.api.payment.dto.PaymentResponse;
-import com.example.hhplus.reservation.api.user.dto.PointChargeResponse;
 import com.example.hhplus.reservation.domain.payment.PaymentService;
 import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -37,10 +34,11 @@ public class PaymentControllerTest {
         long reservationId = 10L;
         long userId = 1L;
         long point = 15000L;
+        long paymentId = 7L;
 
         // when
         String requestJson = "{\"reservationId\":" + reservationId + ", \"userId\":" + userId + ", \"point\":" + point + "}";
-        when(paymentService.createPayment(reservationId, userId, point)).thenReturn(PaymentResponse.SUCCESS);
+        when(paymentService.createPayment(reservationId, userId, point)).thenReturn(paymentId);
 
         // then
         mockMvc.perform(MockMvcRequestBuilders.post("/api/payment")
@@ -49,7 +47,7 @@ public class PaymentControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result").value(PaymentResponse.SUCCESS.toString()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result").value(paymentId));
     }
 
     @Test

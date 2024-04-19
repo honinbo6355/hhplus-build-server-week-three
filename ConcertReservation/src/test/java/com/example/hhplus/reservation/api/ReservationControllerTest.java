@@ -1,9 +1,6 @@
 package com.example.hhplus.reservation.api;
 
 import com.example.hhplus.reservation.api.reservation.ReservationController;
-import com.example.hhplus.reservation.api.reservation.dto.ReservationRequest;
-import com.example.hhplus.reservation.api.reservation.dto.ReservationResponse;
-import com.example.hhplus.reservation.api.user.dto.PointChargeResponse;
 import com.example.hhplus.reservation.domain.reservation.ReservationService;
 import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
@@ -37,10 +34,11 @@ public class ReservationControllerTest {
         long concertDetailId = 1L;
         long seatId = 5L;
         long userId = 1L;
+        long reservationId = 10L;
         String requestJson = "{\"concertDetailId\":" + concertDetailId + ", \"userId\":" + userId + ", \"seatId\":" + seatId + "}";
 
         // when
-        when(reservationService.createReservation(concertDetailId, userId, seatId)).thenReturn(ReservationResponse.SUCCESS);
+        when(reservationService.createReservation(concertDetailId, userId, seatId)).thenReturn(reservationId);
 
         // then
         mockMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
@@ -49,7 +47,7 @@ public class ReservationControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result").value(PointChargeResponse.SUCCESS.toString()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result").value(reservationId));
     }
 
     @Test

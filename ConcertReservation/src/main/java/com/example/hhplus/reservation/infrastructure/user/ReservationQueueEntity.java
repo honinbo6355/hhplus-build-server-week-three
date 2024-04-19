@@ -11,7 +11,11 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(schema = "test", name = "reservation_queue")
+@Table(schema = "test", name = "reservation_queue",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "reservation_queue_unique_key",
+                        columnNames = {"userId"})
+        })
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

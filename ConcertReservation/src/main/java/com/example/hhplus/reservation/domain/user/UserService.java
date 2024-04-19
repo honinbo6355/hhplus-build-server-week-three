@@ -20,15 +20,15 @@ public class UserService {
 
     // TODO 동시성 제어
     @Transactional
-    public PointChargeResponse chargePoint(long userId, long point) {
+    public Long chargePoint(long userId, long point) {
         User user = userRepository.findById(userId);
         if (user == null) {
             throw new NullPointerException();
         }
         user.charge(point);
         userRepository.save(user);
-        pointHistoryRepository.save(new PointHistory(userId, TransactionType.CHARGE, point));
-        return PointChargeResponse.SUCCESS;
+        PointHistory pointHistory = pointHistoryRepository.save(new PointHistory(userId, TransactionType.CHARGE, point));
+        return pointHistory.getId();
     }
 
     @Transactional(readOnly = true)

@@ -29,7 +29,18 @@ public class ReservationTokenRepositoryImpl implements ReservationTokenRepositor
     }
 
     @Override
-    public int expireToken(LocalDateTime targetDateTime) {
-        return 0;
+    public int expireDurationOverToken(ReservationTokenStatus updateStatus, ReservationTokenStatus status, LocalDateTime targetDateTime, LocalDateTime updatedAt) {
+        return reservationTokenJpaRepository.expireDurationOverToken(updateStatus, status, targetDateTime, updatedAt);
+    }
+
+    @Override
+    public int countByStatus(ReservationTokenStatus status) {
+        return reservationTokenJpaRepository.countByStatus(status);
+    }
+
+    @Override
+    public Optional<ReservationToken> findByTokenValueAndStatus(String token, ReservationTokenStatus status) {
+        return reservationTokenJpaRepository.findByTokenValueAndStatus(token, status)
+                .map(ReservationTokenEntity::toDomain);
     }
 }

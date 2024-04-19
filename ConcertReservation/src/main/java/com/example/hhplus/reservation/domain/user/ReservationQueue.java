@@ -21,4 +21,9 @@ public class ReservationQueue {
         this.status = status;
         this.userId = userId;
     }
+
+    public void done() {
+        this.status = ReservationQueueStatus.DONE;
+        this.updatedAt = LocalDateTime.now();
+    }
 }

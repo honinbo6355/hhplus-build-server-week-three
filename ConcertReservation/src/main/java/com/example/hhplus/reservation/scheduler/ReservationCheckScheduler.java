@@ -1,5 +1,6 @@
 package com.example.hhplus.reservation.scheduler;
 
+import com.example.hhplus.reservation.domain.reservation.Reservation;
 import com.example.hhplus.reservation.domain.reservation.ReservationRepository;
 import com.example.hhplus.reservation.domain.reservation.ReservationStatus;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,8 @@ public class ReservationCheckScheduler {
     @Transactional
     public void cancelReservation() {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime targetDateTime = now.minusMinutes(5);
+        LocalDateTime targetDateTime = now.minusMinutes(Reservation.RESERVATION_DURATION_MINUTE);
+//        LocalDateTime targetDateTime = now.minusSeconds(8);
         int cancelCount = reservationRepository.cancelReservation(ReservationStatus.CANCELLED, ReservationStatus.IN_PROGRESS, targetDateTime, now);
         log.info("cancelCount : {}", cancelCount);
     }

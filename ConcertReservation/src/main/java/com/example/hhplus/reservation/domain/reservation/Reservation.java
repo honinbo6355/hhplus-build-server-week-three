@@ -24,6 +24,8 @@ public class Reservation {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
+    public static final int RESERVATION_DURATION_MINUTE = 5;
+
     public Reservation(Long id, Long concertDetailId, Long seatId, Long userId, ReservationStatus status, LocalDateTime reserveAt) {
         this.id = id;
         this.concertDetailId = concertDetailId;
