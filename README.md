@@ -141,6 +141,7 @@
 
 <details>
     <summary><b>Swagger</b></summary>
+    
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/1747b6af-93d0-41a6-8998-2288b8394ee8)
 
 </details>
