@@ -72,10 +72,15 @@
 - 동시에 여러 사용자가 예약 요청을 했을 때, 좌석이 중복으로 배정 가능하지 않도록 합니다.
 </details>
 
-# ERD
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cfdffede-c105-4db7-bcd8-07a147d122a5)
+<details>
+    <summary><b>ERD</b></summary>
 
-# Milestone
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cfdffede-c105-4db7-bcd8-07a147d122a5)
+</details>
+
+<details>
+    <summary><b>Milestone</b></summary>
+
 - 하루=8h, 8*5일=40h
 1. dummy 데이터 생성 : 3h ( ~ 4월7일) 
 2. 잔액 충전 API : 5h ( ~ 4월7일) <br/>
@@ -105,8 +110,10 @@
 10. 잔여 시간 검증 Polling 구현 <br/> <br/>
 11. 토큰 유효성 체크 인터셉터 구현 <br/> <br/>
 12. 통합테스트 <br/> <br/>
+</details>
 
-## Sequence Diagram
+<details>
+    <summary><b>Sequence Diagram</b></summary>
 
 ### 유저 토큰 발급
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/be43a603-ff2e-44c4-9a01-68dbe47de1ef)
@@ -131,25 +138,34 @@
 
 ### 결제
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/9f38d5ec-1e17-475b-965a-f078ac952ef6)
+</details>
 
-## Swagger
-
+<details>
+    <summary><b>Swagger</b></summary>
 ![FireShot Capture 001 - Swagger UI - localhost](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/bf4f347b-efdd-4e13-8223-959a78c3011c)
+</details>
 
-## 트러블 슈팅
+<details>
+    <summary><b>트러블 슈팅</b></summary>
+
 - 각각의 콘서트에 대한 좌석 정보를 갯수만큼 row를 생성하는 방식이 비효율적이라고 생각했습니다.
   - 해결 : 예약 테이블에 콘서트 상세 아이디와 좌석 아이디 컬럼을 관리하게했고, 예약 가능한 좌석 조회시에는 (전체 좌석 - 예약되어있는 좌석) 과정을 통해 예약 가능한 좌석들을 추출할 수 있었습니다.
 - 한 좌석에 대해 동시에 예약 요청이 들어올 경우 동시성 해결하는 방법에 대해 고민했습니다.
   - 해결 : 예약 테이블에 콘서트 상세 아이디와 좌석 아이디를 유니크키로 생성해 중복 예약이 불가능하도록 처리했습니다.
 - 토큰과 대기열 테이블을 하나로 관리하는 경우 진입 여부 조회시 동시성 이슈가 발생할거라고 판단했습니다.
   - 해결 : 토큰 테이블(사이트 진입 가능 유저)와 대기열 테이블(대기 중인 유저)를 분리했습니다. 그리고 Polling 작업을 통해 토큰 여유공간에 따라 대기 중인 유저들을 토큰 테이블로 옮기는 프로세스로 처리했습니다.
+</details>
 
-## 브랜치 전략
+<details>
+    <summary><b>브랜치 전략</b></summary>
+
 - dev : 개발자가 자유롭게 테스트할 수 있는 개발 환경
 - stage : prod 배포전 테스트해볼 수 있는 환경
 - prod : 운영 환경
+</details>
 
-## API Interface
+<details>
+    <summary><b>API Interface</b></summary>
 
 ### 유저 토큰 발급 API
 
@@ -328,3 +344,4 @@ token="550e8400-e29b-41d4-a716-446655440000",
     "error": null
 }
 ```
+</details>
