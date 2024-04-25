@@ -5,7 +5,7 @@
 💡 아래 명세를 잘 읽어보고, 서버를 구현합니다.
 
 <details>
-<summary><b>Description</b></summary>
+<summary><h2><b>Description</b></h2></summary>
 
 - **콘서트 예약 서비스**를 구현해 봅니다.
 - 대기열 시스템을 구축하고, 예약 서비스는 작업가능한 유저만 수행할 수 있도록 해야합니다.
