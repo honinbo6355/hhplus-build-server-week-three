@@ -1,6 +1,7 @@
 package com.example.hhplus.reservation.api;
 
 import com.example.hhplus.reservation.api.user.UserController;
+import com.example.hhplus.reservation.domain.user.ReservationTokenRepository;
 import com.example.hhplus.reservation.domain.user.User;
 import com.example.hhplus.reservation.domain.user.UserService;
 import com.example.hhplus.reservation.exception.CustomException;
@@ -26,6 +27,9 @@ public class UserControllerTest {
 
     @MockBean
     private UserService userService;
+
+    @MockBean
+    private ReservationTokenRepository reservationTokenRepository;
 
     @Autowired
     private MockMvc mockMvc;

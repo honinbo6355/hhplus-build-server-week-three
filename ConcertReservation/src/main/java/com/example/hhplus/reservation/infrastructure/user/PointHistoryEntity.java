@@ -9,11 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(schema = "test", name = "point_history",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "point_history_unique_key",
-                        columnNames = {"userId", "transactionType"})
-        })
+@Table(schema = "test", name = "point_history")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

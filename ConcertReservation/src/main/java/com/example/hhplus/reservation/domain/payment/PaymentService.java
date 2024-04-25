@@ -67,7 +67,7 @@ public class PaymentService {
         Payment payment = paymentRepository.save(new Payment(reservationId, point, PaymentStatus.SUCCESSED));
 
         reservationRepository.save(reservation);
-        pointHistoryRepository.save(new PointHistory(userId, TransactionType.USE, point));
+        pointHistoryRepository.save(new PointHistory(null, userId, TransactionType.USE, point));
         userRepository.save(user);
         concertDetailRepository.save(concertDetail);
         reservationTokenRepository.save(reservationToken);

@@ -43,7 +43,7 @@ public class UserServiceTest {
         long point = 3000L;
         long chargePoint = 5000L;
         User user = new User(userId, "유저1", point);
-        PointHistory pointHistory = new PointHistory(userId, TransactionType.CHARGE, chargePoint);
+        PointHistory pointHistory = new PointHistory(1L, userId, TransactionType.CHARGE, chargePoint);
 
         // when
         when(userRepository.findById(userId)).thenReturn(user);

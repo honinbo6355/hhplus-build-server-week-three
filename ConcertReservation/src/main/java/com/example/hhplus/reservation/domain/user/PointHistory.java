@@ -16,7 +16,8 @@ public class PointHistory {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    public PointHistory(Long userId, TransactionType transactionType, long amount) {
+    public PointHistory(Long id, Long userId, TransactionType transactionType, long amount) {
+        this.id = id;
         this.userId = userId;
         this.transactionType = transactionType;
         this.amount = amount;

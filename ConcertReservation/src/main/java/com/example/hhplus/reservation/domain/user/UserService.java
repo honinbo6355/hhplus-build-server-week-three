@@ -27,7 +27,7 @@ public class UserService {
         }
         user.charge(point);
         userRepository.save(user);
-        PointHistory pointHistory = pointHistoryRepository.save(new PointHistory(userId, TransactionType.CHARGE, point));
+        PointHistory pointHistory = pointHistoryRepository.save(new PointHistory(null, userId, TransactionType.CHARGE, point));
         return pointHistory.getId();
     }
 

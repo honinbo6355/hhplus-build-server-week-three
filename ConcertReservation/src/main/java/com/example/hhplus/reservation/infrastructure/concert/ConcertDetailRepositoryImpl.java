@@ -25,9 +25,7 @@ public class ConcertDetailRepositoryImpl implements ConcertDetailRepository {
 
     @Override
     public ConcertDetail findById(long concertDetailId) {
-        return concertDetailJpaRepository.findById(concertDetailId)
-                .map(ConcertDetailEntity::toDomain)
-                .orElse(null);
+        return concertDetailJpaRepository.selectById(concertDetailId).toDomain();
     }
 
     @Override

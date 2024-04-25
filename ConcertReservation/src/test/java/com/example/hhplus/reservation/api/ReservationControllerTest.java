@@ -2,6 +2,9 @@ package com.example.hhplus.reservation.api;
 
 import com.example.hhplus.reservation.api.reservation.ReservationController;
 import com.example.hhplus.reservation.domain.reservation.ReservationService;
+import com.example.hhplus.reservation.domain.user.ReservationToken;
+import com.example.hhplus.reservation.domain.user.ReservationTokenRepository;
+import com.example.hhplus.reservation.domain.user.ReservationTokenStatus;
 import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +17,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,10 +34,14 @@ public class ReservationControllerTest {
     @MockBean
     private ReservationService reservationService;
 
+    @MockBean
+    private ReservationTokenRepository reservationTokenRepository;
+
     @Test
     @DisplayName("좌석_예약_요청_성공")
     public void 좌석_예약_요청_성공() throws Exception {
         // given
+        String token = "97ef7717-2bcd-4e23-9e7a-3d9bfa4ea5dd";
         long concertDetailId = 1L;
         long seatId = 5L;
         long userId = 1L;
@@ -38,10 +49,12 @@ public class ReservationControllerTest {
         String requestJson = "{\"concertDetailId\":" + concertDetailId + ", \"userId\":" + userId + ", \"seatId\":" + seatId + "}";
 
         // when
+        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now())));
         when(reservationService.createReservation(concertDetailId, userId, seatId)).thenReturn(reservationId);
 
         // then
         mockMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
+                        .header("token", token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson)
                         .accept(MediaType.APPLICATION_JSON))
@@ -54,16 +67,19 @@ public class ReservationControllerTest {
     @DisplayName("이미_예약중인경우_실패")
     public void 이미_예약중인경우_실패() throws Exception {
         // given
+        String token = "97ef7717-2bcd-4e23-9e7a-3d9bfa4ea5dd";
         long concertDetailId = 1L;
         long seatId = 5L;
         long userId = 1L;
         String requestJson = "{\"concertDetailId\":" + concertDetailId + ", \"userId\":" + userId + ", \"seatId\":" + seatId + "}";
 
         // when
+        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now())));
         when(reservationService.createReservation(concertDetailId, userId, seatId)).thenThrow(new CustomException(ErrorCode.ALREADY_RESERVED));
 
         // then
         mockMvc.perform(MockMvcRequestBuilders.post("/api/reservations")
+                        .header("token", token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson)
                         .accept(MediaType.APPLICATION_JSON))
