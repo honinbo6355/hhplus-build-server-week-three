@@ -8,11 +8,8 @@
 </aside>
 
 <details>
-    <summary>
-        # Description
-    </summary>
+    <summary>Description</summary>
 
-        
     - **콘서트 예약 서비스**를 구현해 봅니다.
     - 대기열 시스템을 구축하고, 예약 서비스는 작업가능한 유저만 수행할 수 있도록 해야합니다.
     - ~~사용자는 좌석예약 시에 미리 충전한 잔액을 이용합니다.~~
