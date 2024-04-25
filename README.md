@@ -2,7 +2,9 @@
 
 # 콘서트 예약 서비스
 
-💡 아래 명세를 잘 읽어보고, 서버를 구현합니다.
+<aside>
+    💡 아래 명세를 잘 읽어보고, 서버를 구현합니다.
+</aside>
 
 <details>
 <summary><b>Description</b></summary>
@@ -28,8 +30,8 @@
 - 대기열 개념을 고려해 구현합니다.
 </details>
 
-## API Specs
-
+<details>
+    <summary><b>API Specs</b></summary>
 1️⃣ `**주요` 유저 대기열 토큰 기능**
 
 - 서비스를 이용할 토큰을 발급받는 API를 작성합니다.
@@ -65,6 +67,7 @@
 
 - 결제 처리하고 결제 내역을 생성하는 API 를 작성합니다.
 - 결제가 완료되면 해당 좌석의 소유권을 유저에게 배정하고 대기열 토큰을 만료시킵니다.
+</details>
 
 <aside>
 💡 **KEY POINT**
