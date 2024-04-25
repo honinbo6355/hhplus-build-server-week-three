@@ -2,10 +2,6 @@
 
 # 콘서트 예약 서비스
 
-<aside>
-    💡 아래 명세를 잘 읽어보고, 서버를 구현합니다.
-</aside>
-
 <details>
 <summary><b>Description</b></summary>
 
@@ -69,13 +65,12 @@
 - 결제가 완료되면 해당 좌석의 소유권을 유저에게 배정하고 대기열 토큰을 만료시킵니다.
 </details>
 
-<aside>
-💡 **KEY POINT**
-
-</aside>
+<details>
+    <summary><b>💡 KEY POINT</b></summary>
 
 - 유저간 대기열을 요청 순서대로 정확하게 제공할 방법을 고민해 봅니다.
 - 동시에 여러 사용자가 예약 요청을 했을 때, 좌석이 중복으로 배정 가능하지 않도록 합니다.
+</details>
 
 # ERD
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cfdffede-c105-4db7-bcd8-07a147d122a5)
