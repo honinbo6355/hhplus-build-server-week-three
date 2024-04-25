@@ -141,7 +141,8 @@
 
 <details>
     <summary><b>Swagger</b></summary>
-![FireShot Capture 001 - Swagger UI - localhost](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/bf4f347b-efdd-4e13-8223-959a78c3011c)
+![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/1747b6af-93d0-41a6-8998-2288b8394ee8)
+
 </details>
 
 <details>
