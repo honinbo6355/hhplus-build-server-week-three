@@ -61,6 +61,9 @@ jobs:
         java-version: '19'
         distribution: 'adopt'
 
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
     - name: Build with Gradle
       run: ./gradlew clean build -PactiveProfile=${{ env.ACTIVE_PROFILE }}
 
