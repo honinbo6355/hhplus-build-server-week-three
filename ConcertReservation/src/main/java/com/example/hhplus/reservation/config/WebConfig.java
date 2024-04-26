@@ -18,6 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/v3/api-docs/**",
+                        "/v3/api-docs.yaml",
                         "/swagger-ui/**",
                         "/api/users/token",
                         "/api/users/{userId}/token",
