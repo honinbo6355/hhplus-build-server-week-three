@@ -31,6 +31,7 @@ on:
     branches: [ "master" ]
 
 env:
+  ACTIVE_PROFILE: dev
   AWS_REGION: ap-northeast-2                   # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: hhplus-concert-dev           # set this to your Amazon ECR repository name
   ECS_SERVICE: hhplus-concert-dev-ecs                 # set this to your Amazon ECS service name
@@ -63,9 +64,14 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: build gradle
-      run: ./gradlew clean build
-        
+    # Gradle clean build
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@v3.3.2
+      with:
+        arguments: clean build
+      env:
+        SPRING_PROFILES_ACTIVE: ${{ env.ACTIVE_PROFILE }}
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
