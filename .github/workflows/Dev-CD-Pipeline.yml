@@ -61,14 +61,17 @@ jobs:
         java-version: '19'
         distribution: 'adopt'
 
-    # Gradle clean build
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@v3.3.2
-      with:
-        arguments: clean build
-        gradle-version: 7.6
-      env:
-        SPRING_PROFILES_ACTIVE: ${{ env.ACTIVE_PROFILE }}
+      run: ./gradlew clean build -PactiveProfile=${{ env.ACTIVE_PROFILE }}
+
+    # Gradle clean build
+#    - name: Build with Gradle
+#      uses: gradle/gradle-build-action@v3.3.2
+#      with:
+#        arguments: clean build
+#        gradle-version: 7.6
+#      env:
+#        SPRING_PROFILES_ACTIVE: ${{ env.ACTIVE_PROFILE }}
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
