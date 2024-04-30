@@ -3,6 +3,7 @@ package com.example.hhplus.reservation.api;
 import com.example.hhplus.reservation.api.user.UserController;
 import com.example.hhplus.reservation.domain.user.ReservationTokenRepository;
 import com.example.hhplus.reservation.domain.user.User;
+import com.example.hhplus.reservation.domain.user.UserFacade;
 import com.example.hhplus.reservation.domain.user.UserService;
 import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
@@ -29,6 +30,9 @@ public class UserControllerTest {
     private UserService userService;
 
     @MockBean
+    private UserFacade userFacade;
+
+    @MockBean
     private ReservationTokenRepository reservationTokenRepository;
 
     @Autowired
@@ -44,7 +48,7 @@ public class UserControllerTest {
         String requestJson = "{\"userId\":" + userId + ", \"point\":" + point + "}";
 
         // when
-        when(userService.chargePoint(userId, point)).thenReturn(pointHistoryId);
+        when(userFacade.chargePoint(userId, point)).thenReturn(pointHistoryId);
 
         // then
         mockMvc.perform(MockMvcRequestBuilders.patch("/api/users/point")
@@ -65,7 +69,7 @@ public class UserControllerTest {
         String requestJson = "{\"userId\":" + userId + ", \"point\":" + point + "}";
 
         // when
-        when(userService.chargePoint(userId, point)).thenThrow(new CustomException(ErrorCode.INVALID_POINT));
+        when(userFacade.chargePoint(userId, point)).thenThrow(new CustomException(ErrorCode.INVALID_POINT));
 
         // then
         mockMvc.perform(MockMvcRequestBuilders.patch("/api/users/point")
