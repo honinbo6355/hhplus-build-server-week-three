@@ -18,6 +18,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public User findByIdWithLock(long userId) {
+        return userJpaRepository.findByIdWithOptimisticLock(userId)
+                .toDomain();
+    }
+
+    @Override
     public User save(User user) {
         return userJpaRepository.save(UserEntity.toEntity(user)).toDomain();
     }

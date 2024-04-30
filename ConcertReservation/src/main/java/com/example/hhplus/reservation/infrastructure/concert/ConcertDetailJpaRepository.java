@@ -14,5 +14,5 @@ public interface ConcertDetailJpaRepository extends JpaRepository<ConcertDetailE
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query(value = "select a from ConcertDetailEntity a where a.id = :id")
-    ConcertDetailEntity selectById(long id);
+    ConcertDetailEntity findByIdWithPessimisticLock(long id);
 }

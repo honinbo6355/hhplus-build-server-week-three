@@ -23,12 +23,15 @@ public class UserEntity extends BaseTimeEntity {
     private String name;
     private long amount;
 
+    @Version
+    private Long version;
+
     public User toDomain() {
-        return new User(id, name, amount, getCreatedAt(), getUpdatedAt());
+        return new User(id, name, amount, version, getCreatedAt(), getUpdatedAt());
     }
 
     public static UserEntity toEntity(User user) {
-        UserEntity userEntity = new UserEntity(user.getId(), user.getName(), user.getAmount());
+        UserEntity userEntity = new UserEntity(user.getId(), user.getName(), user.getAmount(), user.getVersion());
 
         return userEntity;
     }

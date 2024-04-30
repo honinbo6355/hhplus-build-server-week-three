@@ -2,13 +2,18 @@ package com.example.hhplus.reservation.domain.user;
 
 import com.example.hhplus.reservation.api.user.dto.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.Token;
+import org.hibernate.StaleObjectStateException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -21,10 +26,7 @@ public class UserService {
     // TODO 동시성 제어
     @Transactional
     public Long chargePoint(long userId, long point) {
-        User user = userRepository.findById(userId);
-        if (user == null) {
-            throw new NullPointerException();
-        }
+        User user = userRepository.findByIdWithLock(userId);
         user.charge(point);
         userRepository.save(user);
         PointHistory pointHistory = pointHistoryRepository.save(new PointHistory(null, userId, TransactionType.CHARGE, point));

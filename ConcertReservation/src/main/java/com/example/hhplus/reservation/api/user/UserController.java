@@ -3,6 +3,7 @@ package com.example.hhplus.reservation.api.user;
 import com.example.hhplus.reservation.api.common.BasicResponse;
 import com.example.hhplus.reservation.api.user.dto.*;
 import com.example.hhplus.reservation.domain.user.User;
+import com.example.hhplus.reservation.domain.user.UserFacade;
 import com.example.hhplus.reservation.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final UserFacade userFacade;
 
     @PostMapping("/token")
     public ResponseEntity<BasicResponse<TokenResponse>> createToken(@RequestBody TokenRequest tokenRequest) {
@@ -29,7 +31,7 @@ public class UserController {
 
     @PatchMapping("/point")
     public ResponseEntity<BasicResponse<Long>> chargePoint(@RequestBody PointChargeRequest pointChargeRequest) {
-        long pointHistoryId = userService.chargePoint(pointChargeRequest.userId(), pointChargeRequest.point());
+        long pointHistoryId = userFacade.chargePoint(pointChargeRequest.userId(), pointChargeRequest.point());
         return new ResponseEntity<>(new BasicResponse<>(pointHistoryId, null), HttpStatus.OK);
     }
 

@@ -48,7 +48,7 @@ public class PaymentService {
             throw new NullPointerException();
         }
 
-        ConcertDetail concertDetail = concertDetailRepository.findById(reservation.getConcertDetailId());
+        ConcertDetail concertDetail = concertDetailRepository.findByIdWithLock(reservation.getConcertDetailId());
         if (concertDetail == null) {
             throw new NullPointerException();
         }

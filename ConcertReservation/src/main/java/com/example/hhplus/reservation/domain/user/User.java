@@ -13,6 +13,7 @@ public class User {
     private Long id;
     private String name;
     private long amount;
+    private Long version;
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
