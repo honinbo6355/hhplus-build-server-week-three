@@ -46,7 +46,7 @@ public class UserServiceTest {
         PointHistory pointHistory = new PointHistory(1L, userId, TransactionType.CHARGE, chargePoint);
 
         // when
-        when(userRepository.findById(userId)).thenReturn(user);
+        when(userRepository.findByIdWithLock(userId)).thenReturn(user);
         when(userRepository.save(user)).thenReturn(user);
         when(pointHistoryRepository.save(any(PointHistory.class))).thenReturn(pointHistory);
 
@@ -66,7 +66,7 @@ public class UserServiceTest {
         User user = new User(userId, "유저1", point);
 
         // when
-        when(userRepository.findById(userId)).thenReturn(user);
+        when(userRepository.findByIdWithLock(userId)).thenReturn(user);
 
         // then
         Assertions.assertThatThrownBy(() -> {
