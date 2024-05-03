@@ -82,7 +82,7 @@ public class IntegrationTest {
     }
 
     @Transactional
-//    @Test
+    @Test
     @DisplayName("동일한_콘서트_좌석을_여러_유저가_예약_동시성_테스트")
     public void 동일한_콘서트_좌석을_여러_유저가_예약_동시성_테스트() throws InterruptedException {
         // given
@@ -172,7 +172,7 @@ public class IntegrationTest {
     }
 
     @Transactional
-//    @Test
+    @Test
     @DisplayName("포인트_충전_동시성_테스트")
     public void 포인트_충전_동시성_테스트() throws InterruptedException {
         // given
