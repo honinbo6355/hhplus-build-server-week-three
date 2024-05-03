@@ -73,7 +73,7 @@ public class PaymentServiceTest {
         when(reservationRepository.findById(reservationId)).thenReturn(reservation);
         when(seatRepository.findById(reservation.getSeatId())).thenReturn(new Seat(seatId, point));
         when(userRepository.findById(userId)).thenReturn(user);
-        when(concertDetailRepository.findByIdWithLock(reservation.getConcertDetailId())).thenReturn(concertDetail);
+        when(concertDetailRepository.findByIdWithPessimisticLock(reservation.getConcertDetailId())).thenReturn(concertDetail);
         when(reservationTokenRepository.findByUserId(userId)).thenReturn(Optional.of(reservationToken));
 
         paymentService.createPayment(reservationId, userId, point);

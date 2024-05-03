@@ -31,7 +31,7 @@ public class ConcertDetailRepositoryImpl implements ConcertDetailRepository {
     }
 
     @Override
-    public ConcertDetail findByIdWithLock(long concertDetailId) {
+    public ConcertDetail findByIdWithPessimisticLock(long concertDetailId) {
         return concertDetailJpaRepository.findByIdWithPessimisticLock(concertDetailId).toDomain();
     }
 

@@ -23,10 +23,9 @@ public class UserService {
     private final ReservationQueueRepository reservationQueueRepository;
     private final ReservationTokenRepository reservationTokenRepository;
 
-    // TODO 동시성 제어
     @Transactional
     public Long chargePoint(long userId, long point) {
-        User user = userRepository.findByIdWithLock(userId);
+        User user = userRepository.findByIdWithOptimisticLock(userId);
         user.charge(point);
         userRepository.save(user);
         PointHistory pointHistory = pointHistoryRepository.save(new PointHistory(null, userId, TransactionType.CHARGE, point));

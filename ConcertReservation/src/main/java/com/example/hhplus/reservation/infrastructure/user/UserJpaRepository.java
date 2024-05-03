@@ -11,4 +11,8 @@ public interface UserJpaRepository extends JpaRepository<UserEntity, Long> {
     @Lock(value = LockModeType.OPTIMISTIC)
     @Query(value = "select a from UserEntity a where a.id = :id")
     UserEntity findByIdWithOptimisticLock(long id);
+
+    @Lock(value = LockModeType.PESSIMISTIC_WRITE)
+    @Query(value = "select a from UserEntity a where a.id = :id")
+    UserEntity findByIdWithPessimisticLock(long id);
 }

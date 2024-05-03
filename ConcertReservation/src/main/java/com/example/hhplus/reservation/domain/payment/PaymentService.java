@@ -43,12 +43,12 @@ public class PaymentService {
             throw new CustomException(ErrorCode.INVALID_RESERVATION_STATUS);
         }
 
-        User user = userRepository.findById(userId);
+        User user = userRepository.findByIdWithPessimisticLock(userId);
         if (user == null) {
             throw new NullPointerException();
         }
 
-        ConcertDetail concertDetail = concertDetailRepository.findByIdWithLock(reservation.getConcertDetailId());
+        ConcertDetail concertDetail = concertDetailRepository.findByIdWithPessimisticLock(reservation.getConcertDetailId());
         if (concertDetail == null) {
             throw new NullPointerException();
         }
