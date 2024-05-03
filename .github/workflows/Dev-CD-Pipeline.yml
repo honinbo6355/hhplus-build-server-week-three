@@ -70,7 +70,7 @@ jobs:
     - name: Build with Gradle
       run: |
           cd ./ConcertReservation
-          ./gradlew clean build -PactiveProfile=${{ env.ACTIVE_PROFILE }}
+          ./gradlew clean build
 
      # Gradle clean build
 #    - name: Build with Gradle
