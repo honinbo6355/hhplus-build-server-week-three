@@ -385,9 +385,9 @@ token="550e8400-e29b-41d4-a716-446655440000",
 - slow query 예상 시나리오 : DB Index 성능 분석을 위해 극단적인 상황을 가정하였다. 토큰 발급 요청이 500만건이 발생했을경우, 토큰 조회시 내 대기순서가 몇번인지 조회하는 쿼리에서 slow query가 발생할거라고 판단했다.
 - Index 추가 시도 : reservation_queue 테이블에는 유저 1명당 하나의 고유한 대기열을 가질 수 있다. 카디널리티가 높은 컬럼을 인덱스로 생성하면 효과를 극대화 할 수 있다고 판단했고, user_id를 unique_key로 생성했다.
 - 성능 테스트 내용
-   - 인덱스 추가 전
-      - 실행 쿼리
+   - 실행 쿼리
       ```sql
       select count(*) from test.reservation_queue where status = 'WAITING' and updated_at < (select updated_at from test.reservation_queue where user_id = 15)
       ```
+   - 인덱스 추가 전
 </details>
