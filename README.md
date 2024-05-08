@@ -390,4 +390,6 @@ token="550e8400-e29b-41d4-a716-446655440000",
       select count(*) from test.reservation_queue where status = 'WAITING' and updated_at < (select updated_at from test.reservation_queue where user_id = 15)
       ```
    - 인덱스 추가 전
+   <img width="210" alt="image" src="https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/f7dee556-b167-4c0b-bdcd-241f3eacf1fc">
+
 </details>
