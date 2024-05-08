@@ -395,4 +395,7 @@ token="550e8400-e29b-41d4-a716-446655440000",
        ```sql
        ALTER TABLE test.reservation_queue ADD CONSTRAINT reservation_queue_user_id_uk UNIQUE(user_id);
        ```
+   - 인덱스 추가 후 결과
+      - <img width="193" alt="image" src="https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/b9439f4a-9eb3-4fcf-8009-6a9e863058da">
+
 </details>
