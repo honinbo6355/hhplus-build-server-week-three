@@ -397,5 +397,6 @@ token="550e8400-e29b-41d4-a716-446655440000",
        ```
    - 인덱스 추가 후 결과
       - <img width="193" alt="image" src="https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/b9439f4a-9eb3-4fcf-8009-6a9e863058da">
-
+   - 결론
+      - 데이터량이 크면 클수록 인덱스 효과가 극대화 되고, 카디널리티가 낮은 컬럼은 인덱스로 생성해도 큰 효과가 없다는걸 알게되었다. 결론적으로 user_id를 인덱스로 추가해 쿼리 성능을 2배 개선하였다.
 </details>
