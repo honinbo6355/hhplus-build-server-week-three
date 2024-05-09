@@ -165,6 +165,8 @@
 - dev : 개발자가 자유롭게 테스트할 수 있는 개발 환경
 - stage : prod 배포전 테스트해볼 수 있는 환경
 - prod : 운영 환경
+- feature : 기능별 개발 브랜치
+
 </details>
 
 <details>
@@ -399,4 +401,11 @@ token="550e8400-e29b-41d4-a716-446655440000",
       - <img width="193" alt="image" src="https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/b9439f4a-9eb3-4fcf-8009-6a9e863058da">
    - 결론
       - 데이터량이 크면 클수록 인덱스 효과가 극대화 되고, 카디널리티가 낮은 컬럼은 인덱스로 생성해도 큰 효과가 없다는걸 알게되었다. 결론적으로 user_id를 인덱스로 추가해 쿼리 성능을 2배 개선하였다.
+</details>
+
+<details>
+    <summary><b>대기열 시스템 설계 리팩토링</b></summary>
+
+- 주요 작업 : 기존에 DB로 구현했던 대기열 시스템을 Redis로 전환
+- 
 </details>
