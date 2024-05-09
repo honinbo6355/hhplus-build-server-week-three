@@ -22,4 +22,6 @@ public interface ReservationJpaRepository extends JpaRepository<ReservationEntit
     @Modifying
     @Query("update ReservationEntity r set r.status = :updateStatus, r.updatedAt = :updatedAt where r.status = :status and r.reserveAt < :targetDateTime")
     int cancelReservation(ReservationStatus updateStatus, ReservationStatus status, LocalDateTime targetDateTime, LocalDateTime updatedAt);
+
+    List<ReservationEntity> findByConcertDetailId(long concertDetailId);
 }
