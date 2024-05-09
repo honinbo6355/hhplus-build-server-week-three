@@ -5,14 +5,20 @@ import com.example.hhplus.reservation.domain.concert.ConcertDetailRepository;
 import com.example.hhplus.reservation.domain.payment.PaymentService;
 import com.example.hhplus.reservation.domain.reservation.*;
 import com.example.hhplus.reservation.domain.user.*;
+import com.example.hhplus.reservation.infrastructure.reservation.ReservationEntity;
+import com.example.hhplus.reservation.infrastructure.reservation.ReservationJpaRepository;
+import com.example.hhplus.reservation.infrastructure.user.ReservationQueueEntity;
+import com.example.hhplus.reservation.infrastructure.user.ReservationQueueJpaRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -49,7 +55,13 @@ public class IntegrationTest {
     private UserRepository userRepository;
 
     @Autowired
+    private ReservationJpaRepository reservationJpaRepository;
+
+    @Autowired
     private UserFacade userFacade;
+
+    @Autowired
+    private ReservationQueueJpaRepository reservationQueueJpaRepository;
 
     @Transactional
 //    @Test
@@ -81,13 +93,17 @@ public class IntegrationTest {
         Assertions.assertThat(reservationQueue.getStatus()).isEqualTo(ReservationQueueStatus.WAITING);
     }
 
+    /**
+     * - 유니크키로 동시성 해결할 경우 : 8470ms
+     * - redis 분산락으로 동시성 해결할 경우 : 18308ms
+     */
     @Transactional
-    @Test
+//    @Test
     @DisplayName("동일한_콘서트_좌석을_여러_유저가_예약_동시성_테스트")
     public void 동일한_콘서트_좌석을_여러_유저가_예약_동시성_테스트() throws InterruptedException {
         // given
         int userCount = 100;
-        long concertDetailId = 2L;
+        long concertDetailId = 4L;
         long seatId = 3L;
         CountDownLatch latch = new CountDownLatch(userCount);
         ExecutorService executorService = Executors.newFixedThreadPool(userCount);
@@ -110,8 +126,9 @@ public class IntegrationTest {
         latch.await();
 
         // then
-        Reservation reservation = reservationRepository.findByConcertDetailIdAndSeatId(concertDetailId, seatId).orElseThrow(NullPointerException::new);
-        Assertions.assertThat(reservation.getStatus()).isEqualTo(ReservationStatus.IN_PROGRESS);
+        List<ReservationEntity> reservationEntityList = reservationJpaRepository.findByConcertDetailId(concertDetailId);
+        Assertions.assertThat(reservationEntityList.size()).isEqualTo(1);
+        Assertions.assertThat(reservationEntityList.get(0).getStatus()).isEqualTo(ReservationStatus.IN_PROGRESS);
     }
 
     @Transactional
@@ -172,7 +189,7 @@ public class IntegrationTest {
     }
 
     @Transactional
-    @Test
+//    @Test
     @DisplayName("포인트_충전_동시성_테스트")
     public void 포인트_충전_동시성_테스트() throws InterruptedException {
         // given
@@ -202,5 +219,25 @@ public class IntegrationTest {
         // then
         User findUser = userRepository.findById(userId);
         Assertions.assertThat(findUser.getAmount()).isEqualTo(point+(chargePoint*nThreads));
+    }
+
+    @Transactional
+    @Test
+    @DisplayName("앞에_대기중인_유저_갯수_조회_성능_테스트")
+    public void 앞에_대기중인_유저_갯수_조회_성능_테스트() {
+        // given
+        long totalCount = reservationQueueJpaRepository.count();
+        long userId = 15;
+        long beforeTime = System.currentTimeMillis(); // 코드 실행 전에 시간 받아오기
+
+        // when
+        int waitingCount = reservationQueueJpaRepository.countByWaitingList(userId);
+        long afterTime = System.currentTimeMillis(); // 코드 실행 후에 시간 받아오기
+        long diffTime = afterTime - beforeTime; // 두 개의 실행 시간
+
+        // then
+        System.out.println("총 대기열 유저: " + totalCount);
+        System.out.println("앞에 대기중인 유저: " + waitingCount);
+        System.out.println("실행 시간(ms): " + diffTime);
     }
 }

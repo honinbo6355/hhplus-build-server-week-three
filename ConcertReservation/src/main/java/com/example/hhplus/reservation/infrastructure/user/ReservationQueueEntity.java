@@ -10,12 +10,18 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * ALTER TABLE test.reservation_queue ADD CONSTRAINT reservation_queue_unique_key UNIQUE(user_id);
+ * ALTER TABLE test.reservation_queue DROP CONSTRAINT reservation_queue_unique_key;
+ */
+//@Entity
+//@Table(schema = "test", name = "reservation_queue",
+//        uniqueConstraints = {
+//                @UniqueConstraint(name = "reservation_queue_unique_key",
+//                        columnNames = {"userId"})
+//        })
 @Entity
-@Table(schema = "test", name = "reservation_queue",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "reservation_queue_unique_key",
-                        columnNames = {"userId"})
-        })
+@Table(schema = "test", name = "reservation_queue")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

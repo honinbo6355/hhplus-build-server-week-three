@@ -7,3 +7,12 @@ services:
     hostname: redis
     ports:
       - "6379:6379"
+  concert-api:
+    image: concert-api
+    container_name: concert-api
+    depends_on:
+      - redis
+    build: .
+    ports:
+      - "8080:8080"
+
