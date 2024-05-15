@@ -66,7 +66,7 @@ public class PaymentServiceTest {
         Reservation reservation = new Reservation(reservationId, concertDetailId, seatId, userId, ReservationStatus.IN_PROGRESS, LocalDateTime.now());
         User user = new User(userId, "유저1", amount);
         ConcertDetail concertDetail = new ConcertDetail(concertDetailId, 1L, LocalDateTime.now(), 50, reservedSeatNum);
-        ReservationToken reservationToken = new ReservationToken(UUID.randomUUID().toString(), ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now());
+        ReservationToken reservationToken = new ReservationToken(UUID.randomUUID().toString(), userId, LocalDateTime.now());
 
         // when
         when(paymentRepository.save(any(Payment.class))).thenReturn(new Payment(reservationId, point, PaymentStatus.SUCCESSED));
@@ -82,14 +82,13 @@ public class PaymentServiceTest {
         Assertions.assertThat(reservation.getStatus()).isEqualTo(ReservationStatus.COMPLETED);
         Assertions.assertThat(user.getAmount()).isEqualTo(amount-point);
         Assertions.assertThat(concertDetail.getReservedSeatNum()).isEqualTo(reservedSeatNum+1);
-        Assertions.assertThat(reservationToken.getStatus()).isEqualTo(ReservationTokenStatus.FINISHED);
 
         verify(reservationRepository, times(1)).save(reservation);
         verify(pointHistoryRepository, times(1)).save(any(PointHistory.class));
         verify(userRepository, times(1)).save(user);
         verify(paymentRepository, times(1)).save(any(Payment.class));
         verify(concertDetailRepository, times(1)).save(concertDetail);
-        verify(reservationTokenRepository, times(1)).save(reservationToken);
+        verify(reservationTokenRepository, times(1)).remove(reservationToken);
     }
 
     @Test

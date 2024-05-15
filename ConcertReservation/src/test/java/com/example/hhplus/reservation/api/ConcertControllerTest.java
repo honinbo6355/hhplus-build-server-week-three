@@ -55,7 +55,7 @@ public class ConcertControllerTest {
         ConcertDateResponse concertDateResponse = new ConcertDateResponse(concertName, concertInfos);
 
         // when
-        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, anyLong(), LocalDateTime.now())));
+        when(reservationTokenRepository.findByToken(token)).thenReturn(Optional.ofNullable(new ReservationToken(token, anyLong(), LocalDateTime.now())));
         when(concertService.getConcertDate(concertId)).thenReturn(concertDateResponse);
 
         // then
@@ -77,7 +77,7 @@ public class ConcertControllerTest {
         List<Long> seatIds = List.of(1L, 2L, 3L, 4L);
 
         // when
-        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, anyLong(), LocalDateTime.now())));
+        when(reservationTokenRepository.findByToken(token)).thenReturn(Optional.ofNullable(new ReservationToken(token, anyLong(), LocalDateTime.now())));
         when(concertService.getConcertSeat(concertDetailId)).thenReturn(seatIds);
 
         // then

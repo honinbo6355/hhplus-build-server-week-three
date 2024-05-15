@@ -2,6 +2,7 @@ package com.example.hhplus.reservation.service;
 
 import com.example.hhplus.reservation.domain.user.*;
 import com.example.hhplus.reservation.exception.CustomException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -108,10 +109,10 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("토큰_존재하는_유저일경우_발급_성공")
-    public void 토큰_존재하는_유저일경우_발급_성공() {
+    public void 토큰_존재하는_유저일경우_발급_성공() throws JsonProcessingException {
         // given
         long userId = 1L;
-        ReservationToken reservationToken = new ReservationToken(UUID.randomUUID().toString(), ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now());
+        ReservationToken reservationToken = new ReservationToken(UUID.randomUUID().toString(), userId, LocalDateTime.now());
 
         // when
         when(userRepository.findById(userId)).thenReturn(new User(userId, "유저1", 5000L));
@@ -125,7 +126,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("토큰_존재하는_유저일경우_발급_성공")
-    public void 처음_토큰_발급하는경우_대기열_추가_성공() {
+    public void 처음_토큰_발급하는경우_대기열_추가_성공() throws JsonProcessingException {
         // given
         long userId = 1L;
 
@@ -141,10 +142,10 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("토큰_재발급하는경우_대기열_추가_성공")
-    public void 토큰_재발급하는경우_대기열_추가_성공() {
+    public void 토큰_재발급하는경우_대기열_추가_성공() throws JsonProcessingException {
         // given
         long userId = 1L;
-        ReservationQueue reservationQueue = new ReservationQueue(ReservationQueueStatus.DONE, userId);
+        ReservationQueue reservationQueue = new ReservationQueue(userId);
 
         // when
         when(userRepository.findById(userId)).thenReturn(new User(userId, "유저1", 5000L));
@@ -154,6 +155,5 @@ public class UserServiceTest {
         // then
         String token = userService.createToken(userId);
         Assertions.assertThat(token).isEqualTo(null);
-        Assertions.assertThat(reservationQueue.getStatus()).isEqualTo(ReservationQueueStatus.WAITING);
     }
 }

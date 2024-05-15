@@ -49,7 +49,7 @@ public class PaymentControllerTest {
 
         // when
         String requestJson = "{\"reservationId\":" + reservationId + ", \"userId\":" + userId + ", \"point\":" + point + "}";
-        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now())));
+        when(reservationTokenRepository.findByToken(token)).thenReturn(Optional.ofNullable(new ReservationToken(token, userId, LocalDateTime.now())));
         when(paymentService.createPayment(reservationId, userId, point)).thenReturn(paymentId);
 
         // then
@@ -74,7 +74,7 @@ public class PaymentControllerTest {
 
         // when
         String requestJson = "{\"reservationId\":" + reservationId + ", \"userId\":" + userId + ", \"point\":" + point + "}";
-        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now())));
+        when(reservationTokenRepository.findByToken(token)).thenReturn(Optional.ofNullable(new ReservationToken(token, userId, LocalDateTime.now())));
         when(paymentService.createPayment(reservationId, userId, point)).thenThrow(new CustomException(ErrorCode.INVALID_USER));
 
         // then
@@ -101,7 +101,7 @@ public class PaymentControllerTest {
 
         // when
         String requestJson = "{\"reservationId\":" + reservationId + ", \"userId\":" + userId + ", \"point\":" + point + "}";
-        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now())));
+        when(reservationTokenRepository.findByToken(token)).thenReturn(Optional.ofNullable(new ReservationToken(token, userId, LocalDateTime.now())));
         when(paymentService.createPayment(reservationId, userId, point)).thenThrow(new CustomException(ErrorCode.INVALID_PAYMENT_POINT));
 
         // then
@@ -128,7 +128,7 @@ public class PaymentControllerTest {
 
         // when
         String requestJson = "{\"reservationId\":" + reservationId + ", \"userId\":" + userId + ", \"point\":" + point + "}";
-        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now())));
+        when(reservationTokenRepository.findByToken(token)).thenReturn(Optional.ofNullable(new ReservationToken(token, userId, LocalDateTime.now())));
         when(paymentService.createPayment(reservationId, userId, point)).thenThrow(new CustomException(ErrorCode.INVALID_RESERVATION_STATUS));
 
         // then

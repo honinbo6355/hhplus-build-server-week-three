@@ -5,6 +5,7 @@ import com.example.hhplus.reservation.domain.user.ReservationTokenRepository;
 import com.example.hhplus.reservation.domain.user.ReservationTokenStatus;
 import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +26,15 @@ public class AuthInterceptor implements HandlerInterceptor {
         log.info("인증 체크 인터셉터 실행 {}", requestURI);
 
         String token = request.getHeader("token");
-        ReservationToken reservationToken = reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)
-                .orElse(null);
-        if (reservationToken == null) {
-            throw new CustomException(ErrorCode.NOT_AUTHORITY);
+
+        try {
+            ReservationToken reservationToken = reservationTokenRepository.findByToken(token)
+                    .orElse(null);
+            if (reservationToken == null) {
+                throw new CustomException(ErrorCode.NOT_AUTHORITY);
+            }
+        } catch (JsonProcessingException e) {
+            throw new CustomException(ErrorCode.INTERNAL_ERROR);
         }
 
         return true;
