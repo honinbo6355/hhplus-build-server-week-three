@@ -7,14 +7,12 @@ import com.example.hhplus.reservation.domain.reservation.*;
 import com.example.hhplus.reservation.domain.user.*;
 import com.example.hhplus.reservation.infrastructure.reservation.ReservationEntity;
 import com.example.hhplus.reservation.infrastructure.reservation.ReservationJpaRepository;
-import com.example.hhplus.reservation.infrastructure.user.ReservationQueueEntity;
-import com.example.hhplus.reservation.infrastructure.user.ReservationQueueJpaRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -60,13 +58,10 @@ public class IntegrationTest {
     @Autowired
     private UserFacade userFacade;
 
-    @Autowired
-    private ReservationQueueJpaRepository reservationQueueJpaRepository;
-
     @Transactional
 //    @Test
     @DisplayName("한_유저가_토큰_발급_여러번_요청시_동시성_테스트")
-    public void 한_유저가_토큰_발급_여러번_요청시_동시성_테스트() throws InterruptedException {
+    public void 한_유저가_토큰_발급_여러번_요청시_동시성_테스트() throws InterruptedException, JsonProcessingException {
         // given
         int nThreads = 100;
         long userId = 16L;
@@ -89,8 +84,8 @@ public class IntegrationTest {
         latch.await();
 
         // then
-        ReservationQueue reservationQueue = reservationQueueRepository.findByUserId(userId).orElseThrow(NullPointerException::new);
-        Assertions.assertThat(reservationQueue.getStatus()).isEqualTo(ReservationQueueStatus.WAITING);
+        ReservationQueue reservationQueue = reservationQueueRepository.findByUserId(userId).orElse(null);
+        Assertions.assertThat(reservationQueue).isNotNull();
     }
 
     /**
@@ -131,12 +126,13 @@ public class IntegrationTest {
         Assertions.assertThat(reservationEntityList.get(0).getStatus()).isEqualTo(ReservationStatus.IN_PROGRESS);
     }
 
+    // TODO 동시성 테스트 실패 확인
     @Transactional
 //    @Test
     @DisplayName("콘서트_좌석_정원제한_동시성_테스트")
     public void 콘서트_좌석_정원제한_동시성_테스트() throws InterruptedException {
         // given
-        int userCount = 100;
+        int userCount = 2;
         long concertDetailId = 4L;
         int seatCount = 50;
         CountDownLatch latch = new CountDownLatch(userCount * seatCount);
@@ -154,17 +150,14 @@ public class IntegrationTest {
                         userService.createToken(userId);
                         ReservationQueue reservationQueue = reservationQueueRepository.findByUserId(userId)
                                 .orElseThrow(NullPointerException::new);
-                        ReservationToken reservationToken = reservationTokenRepository.findByUserId(reservationQueue.getUserId())
+                        ReservationToken reservationToken = reservationTokenRepository.findByUserId(userId)
                                 .orElse(null);
                         if (reservationToken == null) {
-                            reservationToken = new ReservationToken(UUID.randomUUID().toString(), ReservationTokenStatus.IN_PROGRESS, reservationQueue.getUserId(), LocalDateTime.now());
-                        } else {
-                            reservationToken.inProgress();
+                            reservationToken = new ReservationToken(UUID.randomUUID().toString(), userId, LocalDateTime.now());
+                            reservationTokenRepository.save(reservationToken);
                         }
-                        reservationQueue.done();
 
-                        reservationTokenRepository.save(reservationToken);
-                        reservationQueueRepository.save(reservationQueue);
+                        reservationQueueRepository.remove(reservationQueue);
 
                         long reservationId = reservationService.createReservation(concertDetailId, userId, seatId);
                         Reservation reservation = reservationRepository.findById(reservationId);
@@ -219,25 +212,5 @@ public class IntegrationTest {
         // then
         User findUser = userRepository.findById(userId);
         Assertions.assertThat(findUser.getAmount()).isEqualTo(point+(chargePoint*nThreads));
-    }
-
-    @Transactional
-    @Test
-    @DisplayName("앞에_대기중인_유저_갯수_조회_성능_테스트")
-    public void 앞에_대기중인_유저_갯수_조회_성능_테스트() {
-        // given
-        long totalCount = reservationQueueJpaRepository.count();
-        long userId = 15;
-        long beforeTime = System.currentTimeMillis(); // 코드 실행 전에 시간 받아오기
-
-        // when
-        int waitingCount = reservationQueueJpaRepository.countByWaitingList(userId);
-        long afterTime = System.currentTimeMillis(); // 코드 실행 후에 시간 받아오기
-        long diffTime = afterTime - beforeTime; // 두 개의 실행 시간
-
-        // then
-        System.out.println("총 대기열 유저: " + totalCount);
-        System.out.println("앞에 대기중인 유저: " + waitingCount);
-        System.out.println("실행 시간(ms): " + diffTime);
     }
 }

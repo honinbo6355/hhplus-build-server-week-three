@@ -6,6 +6,7 @@ import com.example.hhplus.reservation.domain.reservation.*;
 import com.example.hhplus.reservation.domain.user.*;
 import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,16 +54,9 @@ public class PaymentService {
             throw new NullPointerException();
         }
 
-        ReservationToken reservationToken = reservationTokenRepository.findByUserId(userId)
-                .orElse(null);
-        if (reservationToken == null) {
-            throw new NullPointerException();
-        }
-
         reservation.setStatus(ReservationStatus.COMPLETED);
         user.use(point);
         concertDetail.increaseReservedSeatNum();
-        reservationToken.expire();
 
         Payment payment = paymentRepository.save(new Payment(reservationId, point, PaymentStatus.SUCCESSED));
 
@@ -70,7 +64,18 @@ public class PaymentService {
         pointHistoryRepository.save(new PointHistory(null, userId, TransactionType.USE, point));
         userRepository.save(user);
         concertDetailRepository.save(concertDetail);
-        reservationTokenRepository.save(reservationToken);
+
+        try {
+            ReservationToken reservationToken = reservationTokenRepository.findByUserId(userId)
+                    .orElse(null);
+            if (reservationToken == null) {
+                throw new NullPointerException();
+            }
+
+            reservationTokenRepository.remove(reservationToken);
+        } catch (JsonProcessingException e) {
+            throw new CustomException(ErrorCode.INTERNAL_ERROR);
+        }
 
         return payment.getId();
     }

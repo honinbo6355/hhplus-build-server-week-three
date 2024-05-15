@@ -49,7 +49,7 @@ public class ReservationControllerTest {
         String requestJson = "{\"concertDetailId\":" + concertDetailId + ", \"userId\":" + userId + ", \"seatId\":" + seatId + "}";
 
         // when
-        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now())));
+        when(reservationTokenRepository.findByToken(token)).thenReturn(Optional.ofNullable(new ReservationToken(token, userId, LocalDateTime.now())));
         when(reservationService.createReservation(concertDetailId, userId, seatId)).thenReturn(reservationId);
 
         // then
@@ -74,7 +74,7 @@ public class ReservationControllerTest {
         String requestJson = "{\"concertDetailId\":" + concertDetailId + ", \"userId\":" + userId + ", \"seatId\":" + seatId + "}";
 
         // when
-        when(reservationTokenRepository.findByTokenValueAndStatus(token, ReservationTokenStatus.IN_PROGRESS)).thenReturn(Optional.ofNullable(new ReservationToken(token, ReservationTokenStatus.IN_PROGRESS, userId, LocalDateTime.now())));
+        when(reservationTokenRepository.findByToken(token)).thenReturn(Optional.ofNullable(new ReservationToken(token, userId, LocalDateTime.now())));
         when(reservationService.createReservation(concertDetailId, userId, seatId)).thenThrow(new CustomException(ErrorCode.ALREADY_RESERVED));
 
         // then

@@ -1,5 +1,6 @@
 package com.example.hhplus.reservation.domain.user;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -8,9 +9,10 @@ import java.util.Optional;
 
 @Repository
 public interface ReservationTokenRepository {
-    Optional<ReservationToken> findByUserId(long userId);
-    ReservationToken save(ReservationToken reservationToken);
-    int expireDurationOverToken(ReservationTokenStatus updateStatus, ReservationTokenStatus status, LocalDateTime targetDateTime, LocalDateTime updatedAt);
-    int countByStatus(ReservationTokenStatus status);
-    Optional<ReservationToken> findByTokenValueAndStatus(String token, ReservationTokenStatus status);
+    ReservationToken save(ReservationToken reservationToken) throws JsonProcessingException;
+    ReservationToken remove(ReservationToken reservationToken) throws JsonProcessingException;
+    Optional<ReservationToken> findByUserId(long userId) throws JsonProcessingException;
+    Optional<ReservationToken> findByToken(String token) throws JsonProcessingException;
+    long expireDurationOverToken() throws JsonProcessingException;
+    long countToken();
 }
