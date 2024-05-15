@@ -12,7 +12,8 @@ public enum ErrorCode {
     INVALID_RESERVATION_STATUS(HttpStatus.BAD_REQUEST, "104", "잘못된 예약 상태입니다."),
     SHORTAGE_POINT(HttpStatus.BAD_REQUEST, "105", "유저 잔액이 부족합니다."),
     NOT_AUTHORITY(HttpStatus.BAD_REQUEST, "106", "접근 권한이 없습니다."),
-    LOCK_NOT_AVAILABLE(HttpStatus.BAD_REQUEST, "107", "Lock 획득이 실패했습니다.");
+    LOCK_NOT_AVAILABLE(HttpStatus.BAD_REQUEST, "107", "Lock 획득이 실패했습니다."),
+    INTERNAL_ERROR(HttpStatus.BAD_REQUEST, "108", "서버 에러가 발생했습니다.");
 
     private final HttpStatus status;
     private final String code;

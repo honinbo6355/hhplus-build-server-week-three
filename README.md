@@ -378,3 +378,25 @@ token="550e8400-e29b-41d4-a716-446655440000",
    - 이유 : 현재 상태에서는 unique key를 활용해서 동시성을 제어하고 있다. DB에서 예외를 발생시키는 것보다 redis에서 락을 잡아서 처리하는게 성능적으로
            나을거라고 판단했다.
 </details>
+
+<details>
+    <summary><b>Query 분석 및 DB Index 설계</b></summary>
+
+- slow query 예상 시나리오 : DB Index 성능 분석을 위해 극단적인 상황을 가정하였다. 토큰 발급 요청이 500만건이 발생했을경우, 토큰 조회시 내 대기순서가 몇번인지 조회하는 쿼리에서 slow query가 발생할거라고 판단했다.
+- Index 추가 시도 : reservation_queue 테이블에는 유저 1명당 하나의 고유한 대기열을 가질 수 있다. 카디널리티가 높은 컬럼을 인덱스로 생성하면 효과를 극대화 할 수 있다고 판단했고, user_id를 unique_key로 생성했다.
+- 성능 테스트 내용
+   - 실행 쿼리
+      ```sql
+      select count(*) from test.reservation_queue where status = 'WAITING' and updated_at < (select updated_at from test.reservation_queue where user_id = 15)
+      ```
+   - 인덱스 추가 전 결과
+      - <img width="210" alt="image" src="https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/f7dee556-b167-4c0b-bdcd-241f3eacf1fc"> <br />
+   - 인덱스 추가한 쿼리
+       ```sql
+       ALTER TABLE test.reservation_queue ADD CONSTRAINT reservation_queue_user_id_uk UNIQUE(user_id);
+       ```
+   - 인덱스 추가 후 결과
+      - <img width="193" alt="image" src="https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/b9439f4a-9eb3-4fcf-8009-6a9e863058da">
+   - 결론
+      - 데이터량이 크면 클수록 인덱스 효과가 극대화 되고, 카디널리티가 낮은 컬럼은 인덱스로 생성해도 큰 효과가 없다는걸 알게되었다. 결론적으로 user_id를 인덱스로 추가해 쿼리 성능을 2배 개선하였다.
+</details>

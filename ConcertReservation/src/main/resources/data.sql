@@ -273,39 +273,39 @@ insert into test.reservation (concert_detail_id, seat_id, user_id, status, reser
 insert into test.reservation (concert_detail_id, seat_id, user_id, status, reserve_at, created_at, updated_at) values (3, 25, 2, 'IN_PROGRESS', now(), now(), now());
 insert into test.reservation (concert_detail_id, seat_id, user_id, status, reserve_at, created_at, updated_at) values (3, 42, 2, 'IN_PROGRESS', now(), now(), now());
 
-insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
-values ('97ef7717-2bcd-4e23-9e7a-3d9bfa4ea5dd', 'IN_PROGRESS', 1, now(), now(), now());
-insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
-values ('a64d43c2-88bf-47ff-8303-7db3f06ca6d8', 'IN_PROGRESS', 2, now(), now(), now());
-insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
-values ('d5617110-0f01-4e07-9a28-b41d19ab6613', 'IN_PROGRESS', 3, now(), now(), now());
-insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
-values ('d8cbdaf9-8f65-4f89-a3fa-26c061cfa7b6', 'FINISHED', 7, now(), now(), now());
-insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
-values ('0f491f2b-4ec5-4fe4-a75c-b6fffe39faa0', 'FINISHED', 8, now(), now(), now());
-insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
-values ('73960111-13de-4202-b9c2-816388fdbb45', 'IN_PROGRESS', 9, now(), now(), now());
-insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
-values ('79184f29-f8a6-45c4-9629-d9366dfa699c', 'IN_PROGRESS', 10, now(), now(), now());
-insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
-values ('1634c734-872e-4b59-a87b-b7fb98c60d43', 'FINISHED', 11, now(), now(), now());
-insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
-values ('2e77a847-a383-4672-8de5-525dab8ae6ec', 'FINISHED', 12, now(), now(), now());
-insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
-values ('6dd50a2f-5c74-464c-9fdd-c67614c6c79a', 'FINISHED', 13, now(), now(), now());
-
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (1, 'DONE', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (2, 'DONE', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (3, 'DONE', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (4, 'WAITING', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (5, 'WAITING', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (6, 'WAITING', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (7, 'DONE', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (8, 'DONE', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (9, 'DONE', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (10, 'DONE', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (11, 'DONE', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (12, 'DONE', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (13, 'DONE', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (14, 'WAITING', now(), now());
-insert into test.reservation_queue (user_id, status, created_at, updated_at) values (15, 'WAITING', now(), now());
+-- insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
+-- values ('97ef7717-2bcd-4e23-9e7a-3d9bfa4ea5dd', 'IN_PROGRESS', 1, now(), now(), now());
+-- insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
+-- values ('a64d43c2-88bf-47ff-8303-7db3f06ca6d8', 'IN_PROGRESS', 2, now(), now(), now());
+-- insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
+-- values ('d5617110-0f01-4e07-9a28-b41d19ab6613', 'IN_PROGRESS', 3, now(), now(), now());
+-- insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
+-- values ('d8cbdaf9-8f65-4f89-a3fa-26c061cfa7b6', 'FINISHED', 7, now(), now(), now());
+-- insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
+-- values ('0f491f2b-4ec5-4fe4-a75c-b6fffe39faa0', 'FINISHED', 8, now(), now(), now());
+-- insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
+-- values ('73960111-13de-4202-b9c2-816388fdbb45', 'IN_PROGRESS', 9, now(), now(), now());
+-- insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
+-- values ('79184f29-f8a6-45c4-9629-d9366dfa699c', 'IN_PROGRESS', 10, now(), now(), now());
+-- insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
+-- values ('1634c734-872e-4b59-a87b-b7fb98c60d43', 'FINISHED', 11, now(), now(), now());
+-- insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
+-- values ('2e77a847-a383-4672-8de5-525dab8ae6ec', 'FINISHED', 12, now(), now(), now());
+-- insert into test.reservation_token (token_value, status, user_id, issued_at, created_at, updated_at)
+-- values ('6dd50a2f-5c74-464c-9fdd-c67614c6c79a', 'FINISHED', 13, now(), now(), now());
+--
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (1, 'DONE', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (2, 'DONE', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (3, 'DONE', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (4, 'WAITING', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (5, 'WAITING', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (6, 'WAITING', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (7, 'DONE', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (8, 'DONE', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (9, 'DONE', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (10, 'DONE', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (11, 'DONE', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (12, 'DONE', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (13, 'DONE', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (14, 'WAITING', now(), now());
+-- insert into test.reservation_queue (user_id, status, created_at, updated_at) values (15, 'WAITING', now(), now());
