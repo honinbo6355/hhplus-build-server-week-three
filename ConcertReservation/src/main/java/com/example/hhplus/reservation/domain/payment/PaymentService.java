@@ -8,6 +8,7 @@ import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,15 +55,15 @@ public class PaymentService {
             throw new NullPointerException();
         }
 
-        reservation.setStatus(ReservationStatus.COMPLETED);
         user.use(point);
-        concertDetail.increaseReservedSeatNum();
-
+        userRepository.save(user);
+        pointHistoryRepository.save(new PointHistory(null, userId, TransactionType.USE, point));
         Payment payment = paymentRepository.save(new Payment(reservationId, point, PaymentStatus.SUCCESSED));
 
+        reservation.setStatus(ReservationStatus.COMPLETED);
+        concertDetail.increaseReservedSeatNum();
+
         reservationRepository.save(reservation);
-        pointHistoryRepository.save(new PointHistory(null, userId, TransactionType.USE, point));
-        userRepository.save(user);
         concertDetailRepository.save(concertDetail);
 
         try {
