@@ -6,6 +6,7 @@ import com.example.hhplus.reservation.infrastructure.push.PushEntity;
 import com.example.hhplus.reservation.infrastructure.push.PushJpaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ public class PushClient {
     private final WebClient webClient;
     private final PushJpaRepository pushJpaRepository;
 
+    @Async("threadPoolTaskExecutor")
     public void sendPush() {
         PushEntity pushEntity = pushJpaRepository.save(new PushEntity(null, PushEntity.PushStatus.SENDING));
 
