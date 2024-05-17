@@ -6,12 +6,15 @@ import com.example.hhplus.reservation.domain.reservation.*;
 import com.example.hhplus.reservation.domain.user.*;
 import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
+import com.example.hhplus.reservation.external.PushClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEventPublisher;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
@@ -23,6 +26,7 @@ public class PaymentService {
     private final SeatRepository seatRepository;
     private final ConcertDetailRepository concertDetailRepository;
     private final ReservationTokenRepository reservationTokenRepository;
+    private final PushClient pushClient;
 
     @Transactional
     public Long createPayment(long reservationId, long userId, long point) {
@@ -77,6 +81,9 @@ public class PaymentService {
         } catch (JsonProcessingException e) {
             throw new CustomException(ErrorCode.INTERNAL_ERROR);
         }
+
+        // 외부 API로 push 발송
+        pushClient.sendPush();
 
         return payment.getId();
     }
