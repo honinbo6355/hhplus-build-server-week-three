@@ -6,11 +6,15 @@ import com.example.hhplus.reservation.domain.reservation.*;
 import com.example.hhplus.reservation.domain.user.*;
 import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
+import com.example.hhplus.reservation.external.PushClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
@@ -22,6 +26,7 @@ public class PaymentService {
     private final SeatRepository seatRepository;
     private final ConcertDetailRepository concertDetailRepository;
     private final ReservationTokenRepository reservationTokenRepository;
+    private final PushClient pushClient;
 
     @Transactional
     public Long createPayment(long reservationId, long userId, long point) {
@@ -54,15 +59,15 @@ public class PaymentService {
             throw new NullPointerException();
         }
 
-        reservation.setStatus(ReservationStatus.COMPLETED);
         user.use(point);
-        concertDetail.increaseReservedSeatNum();
-
+        userRepository.save(user);
+        pointHistoryRepository.save(new PointHistory(null, userId, TransactionType.USE, point));
         Payment payment = paymentRepository.save(new Payment(reservationId, point, PaymentStatus.SUCCESSED));
 
+        reservation.setStatus(ReservationStatus.COMPLETED);
+        concertDetail.increaseReservedSeatNum();
+
         reservationRepository.save(reservation);
-        pointHistoryRepository.save(new PointHistory(null, userId, TransactionType.USE, point));
-        userRepository.save(user);
         concertDetailRepository.save(concertDetail);
 
         try {
@@ -76,6 +81,9 @@ public class PaymentService {
         } catch (JsonProcessingException e) {
             throw new CustomException(ErrorCode.INTERNAL_ERROR);
         }
+
+        // 외부 API로 push 발송
+        pushClient.sendPush();
 
         return payment.getId();
     }
