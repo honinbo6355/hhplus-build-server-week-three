@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PushMockController {
 
     @PostMapping
-    public ResponseEntity<String> sendPush() {
+    public ResponseEntity<String> sendPush() throws InterruptedException {
+        Thread.sleep(5000);
         String result = "send push completed";
         if (!result.equals("")) {
             throw new RuntimeException();
