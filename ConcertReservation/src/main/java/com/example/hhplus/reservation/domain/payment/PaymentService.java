@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.reactive.function.client.WebClient;
 
 @Slf4j
 @Service
@@ -82,8 +81,16 @@ public class PaymentService {
             throw new CustomException(ErrorCode.INTERNAL_ERROR);
         }
 
-        // 외부 API로 push 발송
-        pushClient.sendPush();
+        /**
+         * - 외부 API로 push 발송
+         * - 외부 API 결과와 관계없이 try catch로 예외 방지
+         */
+
+        try {
+            pushClient.sendPush();
+        } catch (CustomException e) {
+            log.info("Transactional 걸린 로직들은 롤백 안되게 처리");
+        }
 
         return payment.getId();
     }

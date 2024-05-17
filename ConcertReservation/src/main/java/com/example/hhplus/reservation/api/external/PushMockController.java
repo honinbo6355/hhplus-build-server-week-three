@@ -13,6 +13,9 @@ public class PushMockController {
     @PostMapping
     public ResponseEntity<String> sendPush() {
         String result = "send push completed";
+        if (!result.equals("")) {
+            throw new RuntimeException();
+        }
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 }
