@@ -21,6 +21,8 @@ public class PushEntity {
     @Enumerated(EnumType.STRING)
     private PushStatus status;
 
+    private Long paymentId;
+
     public enum PushStatus {
         SENDING,
         COMPLETED
