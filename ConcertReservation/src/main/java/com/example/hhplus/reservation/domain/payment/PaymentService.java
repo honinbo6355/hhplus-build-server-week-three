@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -28,8 +29,6 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final SeatRepository seatRepository;
     private final ConcertDetailRepository concertDetailRepository;
-    private final ReservationTokenRepository reservationTokenRepository;
-    private final PushClient pushClient;
     private final ApplicationEventPublisher applicationEventPublisher;
 
     @Transactional
@@ -76,7 +75,6 @@ public class PaymentService {
 
         log.info("createPayment tx : {}", TransactionSynchronizationManager.isActualTransactionActive());
         applicationEventPublisher.publishEvent(new ReservationTokenEvent(userId));
-        applicationEventPublisher.publishEvent(new PushEvent(payment.getId()));
 
         log.info("{}번 결제 완료", payment.getId());
 
