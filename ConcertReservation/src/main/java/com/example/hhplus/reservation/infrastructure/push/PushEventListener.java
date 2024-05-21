@@ -1,8 +1,7 @@
 package com.example.hhplus.reservation.infrastructure.push;
 
-import com.example.hhplus.reservation.external.PushClient;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.event.EventListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
@@ -12,11 +11,11 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @RequiredArgsConstructor
 public class PushEventListener {
 
-    private final PushClient pushClient;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onPushEvent(PushEvent pushEvent) {
-        pushClient.sendPush(pushEvent.getPaymentId());
+        kafkaTemplate.send("push-topic", String.valueOf(pushEvent.getPaymentId()));
     }
 }

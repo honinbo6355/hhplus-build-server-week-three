@@ -1,16 +1,10 @@
 package com.example.hhplus.reservation.external;
 
-import com.example.hhplus.reservation.exception.CustomException;
-import com.example.hhplus.reservation.exception.ErrorCode;
 import com.example.hhplus.reservation.infrastructure.push.PushEntity;
-import com.example.hhplus.reservation.infrastructure.push.PushEvent;
 import com.example.hhplus.reservation.infrastructure.push.PushJpaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -33,7 +27,7 @@ public class PushClient {
                     .block();
             log.info("push 발송 결과 : {}", result);
         } catch (Exception e) {
-            throw new CustomException(ErrorCode.INTERNAL_ERROR);
+            log.error("{}", e);
         }
 
         pushEntity.setStatus(PushEntity.PushStatus.COMPLETED);

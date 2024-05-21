@@ -17,12 +17,11 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @RequiredArgsConstructor
 public class ReservationTokenEventListener {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onReservationTokenEvent(ReservationTokenEvent event) {
-        Long userId = event.getUserId();
-        kafkaTemplate.send("reservation-topic", String.valueOf(userId));
+        kafkaTemplate.send("token-topic", String.valueOf(event.getUserId()));
     }
 }

@@ -6,14 +6,11 @@ import com.example.hhplus.reservation.domain.reservation.*;
 import com.example.hhplus.reservation.domain.user.*;
 import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
-import com.example.hhplus.reservation.external.PushClient;
 import com.example.hhplus.reservation.infrastructure.push.PushEvent;
 import com.example.hhplus.reservation.infrastructure.user.ReservationTokenEvent;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -75,7 +72,7 @@ public class PaymentService {
 
         log.info("createPayment tx : {}", TransactionSynchronizationManager.isActualTransactionActive());
         applicationEventPublisher.publishEvent(new ReservationTokenEvent(userId));
-
+        applicationEventPublisher.publishEvent(new PushEvent(payment.getId()));
         log.info("{}번 결제 완료", payment.getId());
 
         return payment.getId();
