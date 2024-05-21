@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   h2:
@@ -9,9 +9,9 @@ spring:
       settings:
         web-allow-others: true
   datasource:
-#    url: jdbc:h2:mem:test;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS test
+    #    url: jdbc:h2:mem:test;DATABASE_TO_UPPER=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS test
 #    url: jdbc:h2:~/test;DATABASE_TO_UPPER=FALSE;DB_CLOSE_ON_EXIT=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS test  # H2 접속 정보
-    url: jdbc:h2:tcp://localhost/~/test;DATABASE_TO_UPPER=FALSE;DB_CLOSE_ON_EXIT=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS test  # H2 접속 정보
+    url: jdbc:h2:tcp://localhost/~/test;DATABASE_TO_UPPER=FALSE;DB_CLOSE_ON_EXIT=FALSE  # H2 접속 정보
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -21,23 +21,19 @@ spring:
     defer-datasource:
       database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create
-#      ddl-auto: none
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
         format_sql: true
         show_sql: true
-  sql:
-    init:
-      mode: always
-      data-locations: classpath:data.sql
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9093 # Kafka 클러스터에 대한 초기 연결에 사용할 호스트 : 포트 목록
+      group-id: consumer_group01 # Group Id
+      auto-offset-reset: earliest # offset 이 없거나 더 이상 없는 경우 어떻게 처리할지 전략 결정
+
   redis:
     host: localhost
     port: 6379
-
-#p6spy query logging
-decorator:
-  datasource:
-    p6spy:
-      enable-logging: true

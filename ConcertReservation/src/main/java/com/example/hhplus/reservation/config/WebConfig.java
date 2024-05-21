@@ -27,6 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/api/users/{userId}/token",
                         "/api/users/point",
                         "/api/users/{userId}/point",
-                        "/api/sample/**");
+                        "/api/sample/**",
+                        "/api/external/**");
     }
 }

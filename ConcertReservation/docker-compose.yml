@@ -16,3 +16,23 @@ services:
     ports:
       - "8080:8080"
 
+  zookeeper: # 서비스 이름. service 하위에 작성하면 해당 이름으로 동작
+    image: wurstmeister/zookeeper # 도커 이미지
+    container_name: zookeeper
+    ports: # 외부포트:컨테이너내부포트
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports: # 외부포트:컨테이너내부포트
+      - "9093:9093"
+    environment: # kafka 브로터를 위한 환경 변수 지정
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9093
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9093
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181 # kafka가 zookeeper에 커넥션하기 위한 대상을 지정
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
+

@@ -165,6 +165,8 @@
 - dev : 개발자가 자유롭게 테스트할 수 있는 개발 환경
 - stage : prod 배포전 테스트해볼 수 있는 환경
 - prod : 운영 환경
+- feature : 기능별 개발 브랜치
+
 </details>
 
 <details>
@@ -399,4 +401,25 @@ token="550e8400-e29b-41d4-a716-446655440000",
       - <img width="193" alt="image" src="https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/b9439f4a-9eb3-4fcf-8009-6a9e863058da">
    - 결론
       - 데이터량이 크면 클수록 인덱스 효과가 극대화 되고, 카디널리티가 낮은 컬럼은 인덱스로 생성해도 큰 효과가 없다는걸 알게되었다. 결론적으로 user_id를 인덱스로 추가해 쿼리 성능을 2배 개선하였다.
+</details>
+
+<details>
+    <summary><b>대기열 시스템 설계 리팩토링</b></summary>
+
+- 주요 작업 : 기존에 DB로 구현했던 대기열 시스템을 Redis로 전환
+- 대기열 토큰 설계
+   - WaitingQueue(대기열 큐) : Redis SortedSet 자료구조의 score값을 활용해서 순번을 정한다. 처음 진입하는 유저는 대기열 큐에 저장되고, 이미 대기중인 유저는 기존 순번을 유지한다.
+   - OngoingToken(활성화 토큰) : Redis Set 자료구조로 진입 가능한 유저들이 존재하는 곳이다.
+- 주요 프로세스
+   - N명의 유저들이 토큰 발급 API 요청시 대기열 큐에 N명 저장
+   - 특정 시간마다 Polling 작업을 통해 대기열 큐에서 활성화 토큰 자료구조로 이동시키는 로직 처리(ex : 최대 토큰 발급 유저 100명, 현재 토큰 발급 유저가 90명이면 대기열 큐에서 유저 10명을 토큰 자료구조로 이동)
+   - 만료시간이 지난 토큰은 Polling 작업을 통해 삭제 처리.(Set 자료구조의 member 단위로 TTL을 설정해 삭제시키려고 했지만, Redis에서는 지원하지않아서 시도 못함..)
+- 프로세스 설계 이유
+   - 최대 토큰 발급 유저수를 정함으로써 트래픽의 최대치가 예측 가능하다.
+   - 비어있는 토큰 발급수만큼 대기열 유저가 채워지기 때문에 해당 유저의 대기 순위가 유의미한 효과가 있다.
+</details>
+
+<details>
+    <summary><b>이벤트 기반 트랜잭션 처리 전략</b></summary>
+    https://honinbo-world.tistory.com/108
 </details>

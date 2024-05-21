@@ -61,6 +61,8 @@ dependencies {
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.1'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.redisson:redisson-spring-boot-starter:3.23.3'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.kafka:spring-kafka'
 }
 
 tasks.named('test') {
