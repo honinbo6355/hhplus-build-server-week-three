@@ -11,8 +11,15 @@ public class WebClientConfig {
 
     @Bean
     public WebClient webClient(WebClient.Builder builder) {
+//        return builder
+//                .baseUrl("http://localhost:8080")
+//                .defaultHeaders(httpHeaders -> {
+//                    httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+//                })
+//                .build();
+
         return builder
-                .baseUrl("http://localhost:8080")
+                .baseUrl("http://concert-api:8080")
                 .defaultHeaders(httpHeaders -> {
                     httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
                 })

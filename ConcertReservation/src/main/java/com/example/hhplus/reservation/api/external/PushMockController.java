@@ -14,9 +14,9 @@ public class PushMockController {
     public ResponseEntity<String> sendPush() throws InterruptedException {
         Thread.sleep(5000);
         String result = "send push completed";
-        if (!result.equals("")) {
-            throw new RuntimeException();
-        }
+//        if (!result.equals("")) {
+//            throw new RuntimeException();
+//        }
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 }

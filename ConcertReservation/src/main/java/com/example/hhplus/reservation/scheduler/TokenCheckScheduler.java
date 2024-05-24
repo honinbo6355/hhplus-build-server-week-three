@@ -39,7 +39,7 @@ public class TokenCheckScheduler {
 //        }
 //    }
 
-    @Scheduled(fixedRateString = "10000")
+    @Scheduled(fixedRateString = "5000")
     @Transactional
     public void queueToIssueToken() {
         long tokenCount = reservationTokenRepository.countToken();
