@@ -423,3 +423,5 @@ token="550e8400-e29b-41d4-a716-446655440000",
     <summary><b>이벤트 기반 트랜잭션 처리 전략</b></summary>
     https://honinbo-world.tistory.com/108
 </details>
+
+![depositphotos_6188309-stock-photo-two-tickets](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/82e02bc2-3fbf-47b2-bec2-9c19bc52fa5e)
