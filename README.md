@@ -79,6 +79,7 @@
 
 </details>
 
+<!--
 <details>
     <summary><b>Milestone</b></summary>
 
@@ -112,6 +113,7 @@
 11. 토큰 유효성 체크 인터셉터 구현 <br/> <br/>
 12. 통합테스트 <br/> <br/>
 </details>
+-->
 
 <details>
     <summary><b>Sequence Diagram</b></summary>
