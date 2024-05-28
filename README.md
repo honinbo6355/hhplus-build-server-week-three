@@ -122,7 +122,7 @@ https://www.erdcloud.com/d/uvDnPHkfF5v7DKF3i
 ![토큰 발급 API   좌석 예약 요청 API-2024-05-28-121148](https://github.com/honinbo6355/reservation-in-microservice/assets/29749722/5e2e18df-731e-427d-b0c5-a6b7d08eeb35)
 
 ### 유저 토큰 조회
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/640d697a-ecb7-45b8-aaa1-73efa0996bef)
+![결제 API   토큰 조회 API-2024-05-28-122813](https://github.com/honinbo6355/reservation-in-microservice/assets/29749722/65b99eb8-92cf-4191-83b0-b0ace582dde9)
 
 ### 예약 가능 날짜 조회
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cf9a972e-26b6-4b24-a4c7-ca41b4e039d1)
