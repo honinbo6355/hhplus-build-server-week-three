@@ -125,22 +125,23 @@ https://www.erdcloud.com/d/uvDnPHkfF5v7DKF3i
 ![결제 API   토큰 조회 API-2024-05-28-122813](https://github.com/honinbo6355/reservation-in-microservice/assets/29749722/65b99eb8-92cf-4191-83b0-b0ace582dde9)
 
 ### 예약 가능 날짜 조회
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cf9a972e-26b6-4b24-a4c7-ca41b4e039d1)
+![예약 가능 날짜 조회 API   예약 가능 좌석 조회 API-2024-05-28-122950](https://github.com/honinbo6355/reservation-in-microservice/assets/29749722/dcc8557d-3fcc-4303-ae49-e5f19063eaeb)
 
 ### 예약 가능 좌석 조회
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/a3e0e445-56c6-44ca-8aa1-446ebc0597cf)
+![예약 가능 날짜 조회 API   예약 가능 좌석 조회 API-2024-05-28-123025](https://github.com/honinbo6355/reservation-in-microservice/assets/29749722/0a8af15c-3ffa-4b71-bd36-92e556755674)
 
 ### 좌석 예약 요청
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/1f503db0-36c5-45ac-868f-d4fd8f41b13c)
+![토큰 발급 API   좌석 예약 요청 API-2024-05-28-123120](https://github.com/honinbo6355/reservation-in-microservice/assets/29749722/3eff3a19-6cec-4dbd-935e-8752331ab45b)
 
 ### 잔액 충전
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/300e6f19-0942-4c32-89cb-a9320770e7b6)
+![잔액 충전 API   잔액 조회 API-2024-05-28-123205](https://github.com/honinbo6355/reservation-in-microservice/assets/29749722/b7310a13-d19c-4829-809d-0384c34f1db1)
 
 ### 잔액 조회
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/5f1037ae-0973-4435-86f3-00536e2a7abd)
+![잔액 충전 API   잔액 조회 API-2024-05-28-123229](https://github.com/honinbo6355/reservation-in-microservice/assets/29749722/60727594-ee86-4181-bb10-b5af5fc51124)
 
 ### 결제
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/9f38d5ec-1e17-475b-965a-f078ac952ef6)
+![결제 API   토큰 조회 API-2024-05-28-123320](https://github.com/honinbo6355/reservation-in-microservice/assets/29749722/e0e7afdf-79ee-445c-ad10-18b9e40339f6)
+
 </details>
 
 <details>
