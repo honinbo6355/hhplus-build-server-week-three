@@ -119,7 +119,7 @@ https://www.erdcloud.com/d/uvDnPHkfF5v7DKF3i
     <summary><b>Sequence Diagram</b></summary>
 
 ### 유저 토큰 발급
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/be43a603-ff2e-44c4-9a01-68dbe47de1ef)
+![토큰 발급 API   좌석 예약 요청 API-2024-05-28-121148](https://github.com/honinbo6355/reservation-in-microservice/assets/29749722/5e2e18df-731e-427d-b0c5-a6b7d08eeb35)
 
 ### 유저 토큰 조회
 ![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/640d697a-ecb7-45b8-aaa1-73efa0996bef)
