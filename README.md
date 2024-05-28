@@ -162,6 +162,7 @@ https://www.erdcloud.com/d/uvDnPHkfF5v7DKF3i
   - 해결 : 토큰 테이블(사이트 진입 가능 유저)와 대기열 테이블(대기 중인 유저)를 분리했습니다. 그리고 Polling 작업을 통해 토큰 여유공간에 따라 대기 중인 유저들을 토큰 테이블로 옮기는 프로세스로 처리했습니다.
 </details>
 
+<!--
 <details>
     <summary><b>브랜치 전략</b></summary>
 
@@ -171,6 +172,7 @@ https://www.erdcloud.com/d/uvDnPHkfF5v7DKF3i
 - feature : 기능별 개발 브랜치
 
 </details>
+-->
 
 <details>
     <summary><b>API Interface</b></summary>
