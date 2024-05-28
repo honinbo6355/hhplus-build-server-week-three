@@ -74,8 +74,8 @@
 
 <details>
     <summary><b>ERD</b></summary>
-    
-![image](https://github.com/honinbo6355/hhplus-build-server-week-three/assets/29749722/cfdffede-c105-4db7-bcd8-07a147d122a5)
+
+https://www.erdcloud.com/d/uvDnPHkfF5v7DKF3i
 
 </details>
 
