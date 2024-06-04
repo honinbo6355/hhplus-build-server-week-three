@@ -2,7 +2,7 @@
 
 # 콘서트 예약 서비스
 
-과제 요구사항 통과율 상위 1% 달성 : 
+<b>과제 요구사항 통과율 상위 1% 달성</b>
 <a href="https://hhpluscertificateofcompletion.oopy.io/">
   <img src="https://static.spartacodingclub.kr/hanghae99/plus/completion/badge_black.svg" />
 </a>
