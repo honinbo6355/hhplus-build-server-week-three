@@ -1,0 +1,43 @@
+PLAIN
+K 11
+targetHosts
+V 0
+
+K 9
+validated
+V 4
+true
+END
+ENDREP
+id: 0-5.0.r9/62
+type: file
+pred: 0-5.0.r8/119
+count: 4
+text: 8 0 36 2126 d74e940500b1aa4982180d8afcd6c8ff 3cdd635154e9d9d739062b19523cb6299c37a9a4 8-8/_1
+props: 9 0 49 49 3fe0195699b968c3c3960bf00486e140
+cpath: /test_script1.groovy
+copyroot: 0 /
+
+PLAIN
+K 14
+.gitconfig.yml
+V 17
+file 0-1.0.r1/346
+K 19
+test_script1.groovy
+V 16
+file 0-5.0.r9/62
+END
+ENDREP
+id: 0.0.r9/416
+type: dir
+pred: 0.0.r8/476
+count: 9
+text: 9 309 94 94 09aa52f6316b0fbbd4243dc80c8fcb60
+cpath: /
+copyroot: 0 /
+
+0-5.0.t8-8 modify-file true true /test_script1.groovy
+
+
+416 542

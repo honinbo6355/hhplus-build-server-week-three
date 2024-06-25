@@ -1,14 +1,11 @@
 package com.example.hhplus.reservation.infrastructure.user;
 
-import com.example.hhplus.reservation.domain.BaseTimeEntity;
+import com.example.hhplus.reservation.infrastructure.BaseTimeEntity;
 import com.example.hhplus.reservation.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(schema = "test", name = "users")

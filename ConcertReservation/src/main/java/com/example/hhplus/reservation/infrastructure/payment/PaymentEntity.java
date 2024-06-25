@@ -1,6 +1,6 @@
 package com.example.hhplus.reservation.infrastructure.payment;
 
-import com.example.hhplus.reservation.domain.BaseTimeEntity;
+import com.example.hhplus.reservation.infrastructure.BaseTimeEntity;
 import com.example.hhplus.reservation.domain.payment.Payment;
 import com.example.hhplus.reservation.domain.payment.PaymentStatus;
 import jakarta.persistence.*;

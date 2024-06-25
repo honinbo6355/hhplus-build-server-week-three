@@ -10,6 +10,7 @@ import com.example.hhplus.reservation.domain.reservation.*;
 import com.example.hhplus.reservation.domain.user.*;
 import com.example.hhplus.reservation.exception.CustomException;
 import com.example.hhplus.reservation.exception.ErrorCode;
+import com.example.hhplus.reservation.infrastructure.user.ReservationTokenEvent;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -49,7 +51,7 @@ public class PaymentServiceTest {
     private ConcertDetailRepository concertDetailRepository;
 
     @Mock
-    private ReservationTokenRepository reservationTokenRepository;
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Test
     @DisplayName("결제_성공")
@@ -66,7 +68,6 @@ public class PaymentServiceTest {
         Reservation reservation = new Reservation(reservationId, concertDetailId, seatId, userId, ReservationStatus.IN_PROGRESS, LocalDateTime.now());
         User user = new User(userId, "유저1", amount);
         ConcertDetail concertDetail = new ConcertDetail(concertDetailId, 1L, LocalDateTime.now(), 50, reservedSeatNum);
-        ReservationToken reservationToken = new ReservationToken(UUID.randomUUID().toString(), userId, LocalDateTime.now());
 
         // when
         when(paymentRepository.save(any(Payment.class))).thenReturn(new Payment(reservationId, point, PaymentStatus.SUCCESSED));
@@ -74,7 +75,6 @@ public class PaymentServiceTest {
         when(seatRepository.findById(reservation.getSeatId())).thenReturn(new Seat(seatId, point));
         when(userRepository.findByIdWithPessimisticLock(userId)).thenReturn(user);
         when(concertDetailRepository.findByIdWithPessimisticLock(reservation.getConcertDetailId())).thenReturn(concertDetail);
-        when(reservationTokenRepository.findByUserId(userId)).thenReturn(Optional.of(reservationToken));
 
         paymentService.createPayment(reservationId, userId, point);
 
@@ -88,7 +88,6 @@ public class PaymentServiceTest {
         verify(userRepository, times(1)).save(user);
         verify(paymentRepository, times(1)).save(any(Payment.class));
         verify(concertDetailRepository, times(1)).save(concertDetail);
-        verify(reservationTokenRepository, times(1)).remove(reservationToken);
     }
 
     @Test

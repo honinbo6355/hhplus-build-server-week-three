@@ -1,0 +1,4 @@
+DateTime,vuser,Tests,Errors,Mean_Test_Time_(ms),Test_Time_Standard_Deviation_(ms),TPS,Mean_response_length,Response_bytes_per_second,Response_errors,Mean_time_to_resolve_host,Mean_time_to_establish_connection,Mean_time_to_first_byte
+2024-05-27 09:47:57,1,101,0,24.842,94.446,50.5,51,2575.5,0,0,4.644,13.822
+2024-05-27 09:48:00,1,243,0,13.951,5.393,121.5,51,6196.5,0,0,3.165,11.28
+2024-05-27 09:48:02,1,135,0,13.304,12.983,67.5,51,3442.5,0,0,3,11.044

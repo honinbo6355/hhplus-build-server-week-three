@@ -20,26 +20,29 @@ services:
 #    ports:
 #      - "6379:6379"
 #
-  concert-api:
-    image: concert-api
-    container_name: concert-api-container
-    environment: # spring app 설정
-      SPRING_DATASOURCE_URL: jdbc:h2:tcp://h2-container:1521/test;DATABASE_TO_UPPER=FALSE;DB_CLOSE_ON_EXIT=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS test # h2 db url
-      SPRING_DATASOURCE_USERNAME: sa # h2 db id
-      SPRING_DATASOURCE_PASSWORD: # h2 db password
-      SPRING_JPA_HIBERNATE_DDL_AUTO: create # DDL 자동 생성
+
+#  concert-api:
+#    image: concert-api
+#    container_name: concert-api-container
+#    environment: # spring app 설정
+#      SPRING_DATASOURCE_URL: jdbc:h2:tcp://h2-container:1521/test;DATABASE_TO_UPPER=FALSE;DB_CLOSE_ON_EXIT=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS test # h2 db url
+#      SPRING_DATASOURCE_USERNAME: sa # h2 db id
+#      SPRING_DATASOURCE_PASSWORD: # h2 db password
+#      SPRING_JPA_HIBERNATE_DDL_AUTO: create # DDL 자동 생성
 #    depends_on:
 #      - db
 #      - redis
-    build: .
-    ports:
-      - "8080:8080"
+#    build: .
+#    ports:
+#      - "8080:8080"
+
 #
 #  zookeeper: # 서비스 이름. service 하위에 작성하면 해당 이름으로 동작
 #    image: wurstmeister/zookeeper # 도커 이미지
 #    container_name: zookeeper
 #    ports: # 외부포트:컨테이너내부포트
 #      - "2181:2181"
+#
 #  kafka:
 #    image: wurstmeister/kafka
 #    container_name: kafka
@@ -57,19 +60,36 @@ services:
 #      - /var/run/docker.sock:/var/run/docker.sock
 #    depends_on:
 #      - zookeeper
-
-#  concert-consumer:
-#    image: concert-consumer
-#    container_name: concert-consumer-container
-#    environment: # spring app 설정
-#      SPRING_DATASOURCE_URL: jdbc:h2:tcp://h2-container:1521/test;DATABASE_TO_UPPER=FALSE;DB_CLOSE_ON_EXIT=FALSE # h2 db url
-#      SPRING_DATASOURCE_USERNAME: sa # h2 db id
-#      SPRING_DATASOURCE_PASSWORD: # h2 db password
-#      SPRING_JPA_HIBERNATE_DDL_AUTO: none # DDL 자동 생성
-#    build: ../ConcertConsumer/
-#    ports:
-#      - "8082:8082"
+#
+  concert-consumer:
+    image: concert-consumer
+    container_name: concert-consumer-container
+    environment: # spring app 설정
+      SPRING_DATASOURCE_URL: jdbc:h2:tcp://h2-container:1521/test;DATABASE_TO_UPPER=FALSE;DB_CLOSE_ON_EXIT=FALSE # h2 db url
+      SPRING_DATASOURCE_USERNAME: sa # h2 db id
+      SPRING_DATASOURCE_PASSWORD: # h2 db password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none # DDL 자동 생성
+    build: ../ConcertConsumer/
+    ports:
+      - "8083:8083"
 #    depends_on:
 #      - db
 #      - redis
+
+#  controller:
+#    image: ngrinder/controller:3.5.9
+#    restart: always
+#    ports:
+#      - "9000:80"
+#      - "16001:16001"
+#      - "12000-12009:12000-12009"
+#    volumes:
+#      - ./ngrinder-controller:/opt/ngrinder-controller
+#
+#  agent:
+#    image: ngrinder/agent:3.5.9
+#    restart: always
+#    links:
+#      - controller
+
 

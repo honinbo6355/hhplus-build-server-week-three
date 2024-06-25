@@ -1,6 +1,6 @@
 package com.example.hhplus.reservation.infrastructure.concert;
 
-import com.example.hhplus.reservation.domain.BaseTimeEntity;
+import com.example.hhplus.reservation.infrastructure.BaseTimeEntity;
 import com.example.hhplus.reservation.domain.concert.Concert;
 import jakarta.persistence.*;
 import lombok.Getter;

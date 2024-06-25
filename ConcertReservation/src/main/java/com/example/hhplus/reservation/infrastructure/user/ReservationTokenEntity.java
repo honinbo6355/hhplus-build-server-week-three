@@ -1,15 +1,12 @@
 package com.example.hhplus.reservation.infrastructure.user;
 
-import com.example.hhplus.reservation.domain.BaseTimeEntity;
 import com.example.hhplus.reservation.domain.user.ReservationToken;
-import com.example.hhplus.reservation.domain.user.ReservationTokenStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,7 +38,7 @@ public class ReservationTokenEntity {
 
     @JsonIgnore
     public boolean isExpired() {
-//        return issuedAt.isBefore(LocalDateTime.now().minusMinutes(TOKEN_DURATION_MINUTE));
-        return issuedAt.isBefore(LocalDateTime.now().minusSeconds(5));
+        return issuedAt.isBefore(LocalDateTime.now().minusMinutes(TOKEN_DURATION_MINUTE));
+//        return issuedAt.isBefore(LocalDateTime.now().minusSeconds(5));
     }
 }

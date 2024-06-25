@@ -1,6 +1,6 @@
 package com.example.hhplus.reservation.infrastructure.user;
 
-import com.example.hhplus.reservation.domain.BaseTimeEntity;
+import com.example.hhplus.reservation.infrastructure.BaseTimeEntity;
 import com.example.hhplus.reservation.domain.user.PointHistory;
 import com.example.hhplus.reservation.domain.user.TransactionType;
 import jakarta.persistence.*;

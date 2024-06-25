@@ -26,18 +26,18 @@ public class TokenCheckScheduler {
     private final ReservationTokenRepository reservationTokenRepository;
     private final ReservationQueueRepository reservationQueueRepository;
 
-//    @Scheduled(fixedRateString = "5000")
-//    @Transactional
-//    public void expireToken() {
-//        try {
-//            long expireCount = reservationTokenRepository.expireDurationOverToken();
-//            if (expireCount > 0) {
-//                log.info("expireCount : {}", expireCount);
-//            }
-//        } catch (JsonProcessingException e) {
-//            log.error("expireToken 에러 : {}", e);
-//        }
-//    }
+    @Scheduled(fixedRateString = "5000")
+    @Transactional
+    public void expireToken() {
+        try {
+            long expireCount = reservationTokenRepository.expireDurationOverToken();
+            if (expireCount > 0) {
+                log.info("expireCount : {}", expireCount);
+            }
+        } catch (JsonProcessingException e) {
+            log.error("expireToken 에러 : {}", e);
+        }
+    }
 
     @Scheduled(fixedRateString = "5000")
     @Transactional
