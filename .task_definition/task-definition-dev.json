@@ -1,5 +1,5 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:730335364153:task-definition/hhplus-concert-dev-td:3",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:730335364153:task-definition/hhplus-concert-dev-td2:1",
   "containerDefinitions": [
     {
       "name": "service-dev",
@@ -33,7 +33,7 @@
       "systemControls": []
     }
   ],
-  "family": "hhplus-concert-dev-td",
+  "family": "hhplus-concert-dev-td2",
   "taskRoleArn": "arn:aws:iam::730335364153:role/ecs-concert-tasks-role",
   "executionRoleArn": "arn:aws:iam::730335364153:role/ecs-concert-tasks-role",
   "networkMode": "awsvpc",
